@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <context-param>
+        <description>
+            Space separated list of Spring configuration files to load.
+        </description>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/application-config.xml
+        </param-value>
+    </context-param>
+    <context-param>
+        <description>
+            Comma-separated list of PrettyFaces configuration files to load.
+        </description>
+        <param-name>com.ocpsoft.pretty.CONFIG_FILES</param-name>
+        <param-value>/WEB-INF/navigation-config.xml</param-value>
+    </context-param>
+    <context-param>
+        <description>
+            PrettyFaces supports configuration via annotations out of the box. Nevertheless 
+            it is strongly recommended to manually specify the java packages that contain 
+            annotated classes. You can specify the packages to scan for annotations by 
+            adding a comma-separated list of them.
+        </description>
+        <param-name>com.ocpsoft.pretty.BASE_PACKAGES</param-name>
+        <param-value>com.asseco.olkdmvs.gateway</param-value>
+    </context-param>
+    <context-param>
+        <description>
+            Compatibility flag to tell the Orchestra that it's encodeUrl() method should
+            be used instead of the standard encodeRedirectUrl().
+        </description>
+        <param-name>com.ocpsoft.pretty.USE_ENCODE_URL_FOR_REDIRECTS</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <!-- Listeners ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <listener>
+        <description>
+            Listener to initialize Spring framework's application context.
+        </description>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <description>
+            Listener responsible of providing Spring framework functionality to each
+            request. This listener is mainly for use with third-party servlets, e.g.
+            the JSF FacesServlet. Within Spring's own web support, DispatcherServlet's
+            processing is perfectly sufficient.
+        </description>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+    <filter>
+        <description>
+            Servlet filter to enable PrettyFaces navigation framework.
+        </description>
+        <filter-name>navigation</filter-name>
+        <filter-class>com.ocpsoft.pretty.PrettyFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>navigation</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration >
+ 
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+ 
+    <!-- To enable JMX Management -->
+    <jmxConfigurator/>
+ 
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>c:\dmvs\logs\log-miner.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>c:\dmvs\logs\log-miner.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender> 
+
+ 
+    <logger name="org.obozek.minermonitor" level="debug" />
+    <logger name="org.springframework" level="info" />
+    <logger name="org.eclipse.persistence" level="info" />
+ 
+    <logger name="org.springframework.beans" level="info" />
+ 
+    <root level="info">
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>
