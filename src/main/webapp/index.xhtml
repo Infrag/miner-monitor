@@ -7,10 +7,17 @@
     </h:head>
     <h:body>
         <h:form>
-            Summary: <h:outputText value="#{backingBean.summary}"/>
+            <h:panelGrid columns="2">
+                Summary: <h:outputText value="#{backingBean.summary}"/>
 
-            URL: <h:inputText value="#{backingBean.url}"/>
+                host: <h:inputText value="#{backingBean.url}"/>
+                port: <h:inputText value="#{backingBean.port}"/>
+            </h:panelGrid>
             <h:commandButton action="#{backingBean.refreshSummary}" value="Refresh"/>
+            <h:commandButton action="#{backingBean.queryConfig()}" value="config"/>
+            <h:commandButton action="#{backingBean.queryDeviceDetails()}" value="deviceDetails"/>
+            <h:commandButton action="#{backingBean.queryDevices()}" value="devices"/>
+            <h:commandButton action="#{backingBean.queryNotify()}" value="notify"/>
         </h:form>
     </h:body>
 </html>
