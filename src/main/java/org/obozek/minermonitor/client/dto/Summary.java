@@ -45,7 +45,7 @@ public class Summary
     private Long hwErrors;
     private Double utility;
     @SerializedName("Difficulty Accepted")
-    private Double dfifficultyAccepted;
+    private Double difficultyAccepted;
     @SerializedName("Best Share")
     private Long bestShare;
     @SerializedName("Device Hardware%")
@@ -57,9 +57,9 @@ public class Summary
     @SerializedName("Pool Stale%")
     private Double poolStale;
 
-    public Summary(Integer elapsed, Double mhsAverage, Double mhs5s, Long foundBlocks, 
-            Long getworks, Long accepted, Long rejected, Long hwErrors, Double utility, 
-            Double dfifficultyAccepted, Long bestShare, Double deviceHardaware, 
+    public Summary(Integer elapsed, Double mhsAverage, Double mhs5s, Long foundBlocks,
+            Long getworks, Long accepted, Long rejected, Long hwErrors, Double utility,
+            Double difficultyAccepted, Long bestShare, Double deviceHardaware,
             Double deviceRejected, Double poolRejected, Double poolStale)
     {
         this.elapsed = elapsed;
@@ -71,7 +71,7 @@ public class Summary
         this.rejected = rejected;
         this.hwErrors = hwErrors;
         this.utility = utility;
-        this.dfifficultyAccepted = dfifficultyAccepted;
+        this.difficultyAccepted = difficultyAccepted;
         this.bestShare = bestShare;
         this.deviceHardaware = deviceHardaware;
         this.deviceRejected = deviceRejected;
@@ -128,9 +128,9 @@ public class Summary
         return utility;
     }
 
-    public Double getDfifficultyAccepted()
+    public Double getDifficultyAccepted()
     {
-        return dfifficultyAccepted;
+        return difficultyAccepted;
     }
 
     public Long getBestShare()
