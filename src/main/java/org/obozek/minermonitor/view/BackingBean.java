@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
-import org.obozek.minermonitor.client.SocketCgMinerClien;
 import org.obozek.minermonitor.service.CgMinerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;

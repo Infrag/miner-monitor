@@ -17,6 +17,8 @@ package org.obozek.minermonitor.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -30,6 +32,7 @@ public class MinerSummary implements Serializable
 {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer elapsed;
     private Double mhsAverage;
@@ -47,7 +50,7 @@ public class MinerSummary implements Serializable
     private Double poolRejected;
     private Double poolStale;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date when;
+    private Date timeAcquired;
     @ManyToOne
     private Miner miner;
 
@@ -211,14 +214,14 @@ public class MinerSummary implements Serializable
         this.poolStale = poolStale;
     }
 
-    public Date getWhen()
+    public Date getTimeAcquired()
     {
-        return when;
+        return timeAcquired;
     }
 
-    public void setWhen(Date when)
+    public void setTimeAcquired(Date timeAcquired)
     {
-        this.when = when;
+        this.timeAcquired = timeAcquired;
     }
 
     public Miner getMiner()

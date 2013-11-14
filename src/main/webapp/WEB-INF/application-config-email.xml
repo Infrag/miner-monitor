@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:ctx="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <!-- Configuration of Mailing    -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${email.server}"/>
+        <property name="username" value="#{'${email.username}' == defaultConfiguration['email.username'] ? null : '${email.username}'}"/>
+        <property name="password" value="#{'${email.password}' == defaultConfiguration['email.password'] ? null : '${email.password}'}"/>
+    </bean>    
+    
+    <!-- Template mailove komunikace --> 
+    <bean class="org.springframework.mail.SimpleMailMessage">
+        <qualifier value="novaZadostToPorizovatel"/>
+        <property name="from" value="${email.from}"/>
+        <property name="subject" value="Výdej dat - založení nové žádosti"/>
+        <property name="text"> 
+            <value><![CDATA[
+                <html>
+                    <head>
+                        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                    </head>
+                    <body>
+                        <p>Dobrý den, </p>
+                        <p>
+                            V aplikaci Výdej dat Portálu ÚP byla zaregistrována nová žádost o data. 
+                            <br/>
+                            Identifikační číslo žádosti je %s. 
+                            <br/>
+                            Detailní informace dané žádosti jsou přístupné na adrese: 
+                        </p>
+                        <p>
+                            <a href='%s'>
+                                %s
+                            </a>
+                        </p>
+                    </body>
+                </html>]]>
+            </value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.mail.SimpleMailMessage">
+        <qualifier value="novaZadostToZadatel"/>
+        <property name="from" value="${email.from}"/>
+        <property name="subject" value="Výdej dat – potvrzení registrace nové žádosti"/>
+        <property name="text"> 
+            <value><![CDATA[<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <html>
+                    <body>
+                        <p>Dobrý den, </p>
+                        <p>
+                            Vaše žádost o výdej dat byla úspěšně zaregistrována v aplikaci Výdej dat Portálu ÚP. 
+                            <br/>
+                            Žádosti bylo přiděleno identifikační číslo %s. 
+                            <br/>
+                            Žádost vyřizují pořizovatelé:
+                        </p>
+                        <p>
+                            %s
+                        </p>
+                        Stav žádosti můžete sledovat na adrese:
+                        <p>
+                            <a href='%s'>
+                                %s
+                            </a>
+                        </p>
+                        Dále budete informováni o schválení/neschválení vaší žádosti a dalším postupu.
+                    </body>
+                </html>]]>
+            </value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.mail.SimpleMailMessage">
+        <qualifier value="zamitnutaZadostToZadatel"/>
+        <property name="from" value="${email.from}"/>
+        <property name="subject" value="Výdej dat - zamítnutí žádosti"/>
+        <property name="text"> 
+            <value><![CDATA[<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <html>
+                    <body>
+                        <p>Dobrý den, </p>
+                        <p>
+                            Vaše žádost s identifikačním číslem %s byla zamítnuta pořizovatelem:
+                            <br/>
+                            %s, kontaktní email: %s.
+                            <br/>
+                            V případě dotazů prosím kontaktujte příslušného pořizovatele.
+                            <br/>
+                            Detailní informace dané žádosti jsou přístupné na adrese: 
+                        </p>
+                        <p>
+                            <a href='%s'>
+                                %s
+                            </a>
+                        </p>
+                    </body>
+                </html>]]>
+            </value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.mail.SimpleMailMessage">
+        <qualifier value="callForVerification"/>
+        <property name="from" value="${email.from}"/>
+        <property name="subject" value="Výzva k verifikaci pasportu - %s"/>
+        <property name="text"> 
+            <value><![CDATA[<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <html>
+                    <body>
+                        <p>Dobrý den,</p>
+                        <p>
+správce dat %s dokončil aktualizaci dat pro pasport s ID = %s, poskytovatel dat = %s. Nyní můžeze zahájit verifikaci dat v rámci tohoto pasportu pomocí mapového portálu pro registrované uživatele. 
+                <br/>
+Odkaz pro otevření mapového portálu s daty daného pasportu:
+                        </p>
+                        <p>
+                            <a href='%s'>
+                                %s
+                            </a>
+                        </p>
+                    </body>
+                </html>]]>
+            </value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.mail.SimpleMailMessage">
+        <qualifier value="schvalenaZadostToZadatel"/>
+        <property name="from" value="${email.from}"/>
+        <property name="subject" value="Výdej dat - schválení žádosti, odsouhlasení předávacího protokolu"/>
+        <property name="text"> 
+            <value><![CDATA[<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <html>
+                    <body>
+                        <p>Dobrý den, </p>
+                        <p>
+                            Vaše žádost s identifikačním číslem %s byla schválena. 
+                            <br/>
+                            V příloze zasíláme připravené předávací protokoly.
+                            <br/>
+                            Proveďte prosím odsouhlasení obsahu předávacích protokolů a připojte podepsané naskenované předávací protokoly.
+                            <br/>
+                            Pro přechod do aplikace Výdej dat a provedení odsouhlasení protokolů můžete použít adresu:
+                        </p>
+                        <p>
+                            <a href='%s'>
+                                %s
+                            </a>
+                        </p>
+                        V následujících dnech budete informováni o možnosti stažení požadovaných dat.
+                    </body>
+                </html>]]>
+            </value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.mail.SimpleMailMessage">
+        <qualifier value="newUserRegisteredNotice"/>
+        <property name="from" value="${email.from}"/>
+        <property name="subject" value="Notifikace o registraci nového uživatele do systému"/>
+        <property name="text"> 
+            <value><![CDATA[<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <html>
+                    <body>
+                        <p>Dobrý den, </p>
+                        <p>
+                            byl přijat požadavek na registraci nového uživatelského 
+                            účtu pro roli %s s identifikátorem %s a uživatelský účet %s. 
+                            Aktivaci účtu je možné provést pomocí aplikace  SecurityManager
+                        </p>
+                    </body>
+                </html>]]>
+            </value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.mail.SimpleMailMessage">
+        <qualifier value="sendProtokol2Zadatel"/>
+        <property name="from" value="${email.from}"/>
+        <property name="subject" value="Protokol o predani dat od pořizovatele"/>
+        <property name="text"> 
+            <value><![CDATA[<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <html>
+                    <body>
+                        <p>Dobrý den, </p>
+                        <p>
+                            Zasíláme Vám protokol o předání dat od pořizovatele %s k žádosti %s.<br/>
+                            Prosím proveďte odsouhlasení protokolu o předání dat.
+                        </p>
+                        <p>
+                            Žádost je dostupá na url: 
+                        </p>
+                        <p>
+                            <a href='%s'>
+                                %s
+                            </a>
+                        </p>
+                    </body>
+                </html>]]>
+            </value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.mail.SimpleMailMessage">
+        <qualifier value="sendProtokol2ZadatelAllDone"/>
+        <property name="from" value="${email.from}"/>
+        <property name="subject" value="Výdej dat - data připravena k výdeji"/>
+        <property name="text"> 
+            <value><![CDATA[<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <html>
+                    <body>
+                        <p>Dobrý den, </p>
+                        <p>
+                            data a informace k vaší žádosti s identifikačním číslem %s jsou
+                            k dispozici na adrese:
+                        </p>
+                        <p>
+                            <a href='%s'>
+                                %s
+                            </a>
+                        </p>
+                        <p>
+                            Tento odkaz bude aktivní 10 dní, s možností trojnásobného stažení.
+                            <br/>
+                            Děkujeme za využití elektronické žádosti.
+                        </p>
+                    </body>
+                </html>]]>
+            </value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.mail.SimpleMailMessage">
+        <qualifier value="sendExportFinishedNotification"/>
+        <property name="from" value="${email.from}"/>
+        <property name="subject" value="Výdej dat - data připravena k výdeji"/>
+        <property name="text"> 
+            <value><![CDATA[<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <html>
+                    <body>
+                        <p>Dobrý den, </p>
+                        <p>
+                            data žádosti s identifikačním číslem %s jsou připravena k výdeji.
+                            <br/>
+                            Potvrďte prosím výdej dané žádosti na adrese:
+                        </p>
+                        <p>
+                            <a href='%s'>
+                                %s
+                            </a>
+                        </p>
+                    </body>
+                </html>]]>
+            </value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.mail.SimpleMailMessage">
+        <qualifier value="sendNew3OddilToPorizovatel"/>
+        <property name="from" value="${email.from}"/>
+        <property name="subject" value="Upozornění na zápis 3.oddílu pasportu"/>
+        <property name="text"> 
+            <value><![CDATA[<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <html>
+                    <body>
+                        <p>Dobrý den, </p>
+                        <p>
+                            Poskytovatel %s provedl zápis 3.oddílu pasportu k pasportu č.%s. Pro zobrazení detailu pasportu a další zpracování 3.oddílu můžete použít odkaz: 
+                        </p>
+                        <p>
+                            <a href='%s'>
+                                %s
+                            </a>
+                        </p>
+                    </body>
+                </html>]]>
+            </value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.mail.SimpleMailMessage">
+        <qualifier value="sendVerifikaceRejectedToPorizovatel"/>
+        <property name="from" value="${email.from}"/>
+        <property name="subject" value="Upozornění na vyjádření k verifikaci"/>
+        <property name="text"> 
+            <value><![CDATA[<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <html>
+                    <body>
+                        <p>
+                            Pasport ID=%s (Poskytovatel dat=%s) - pořizovatel %s zamítl verifikaci s odůvodněním: %s. 
+                        </p>
+                    </body>
+                </html>]]>
+            </value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.mail.SimpleMailMessage">
+        <qualifier value="sendNewPoskytovatelRequest"/>
+        <property name="from" value="${email.from}"/>
+        <property name="subject" value="Upozornění na žádost o přidání nového poskytovatele dat"/>
+        <property name="text"> 
+            <value><![CDATA[<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <html>
+                    <body>
+                        <p>Dobrý den, </p>
+                        <p>
+                            Uživatel %s registroval žádost o přidání nového Poskytovatele dat. 
+                        </p>
+                        <p>
+                            <ul>
+                                <li>IČO: %s</li>
+                                <li>Název: %s</li>
+                                <li>Adresa: %s</li>
+                                <li>Oprávněná osoba: %s</li>
+                                <li>Kontakt na oprávněnou osobu: %s</li>
+                                <li>Kontaktní osoba: %s</li>
+                                <li>Kontakt na kontaktní osobu: %s</li>
+                            </ul>
+                        </p>
+                    </body>
+                </html>]]>
+            </value>
+        </property>
+    </bean>
+    
+</beans>
