@@ -14,7 +14,9 @@
  */
 package org.obozek.minermonitor.service;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import org.obozek.minermonitor.entities.User;
 import org.obozek.minermonitor.entities.UserRole;
 import org.obozek.minermonitor.repository.UserRepository;
@@ -28,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class UserService
+public class UserService 
 {
 
     @Autowired
@@ -41,6 +43,15 @@ public class UserService
         user.setUserRoles(new ArrayList<UserRole>());
         // set default user role
         user.getUserRoles().add(roleService.getDefaultUserRole());
+        user.setVerified(Boolean.FALSE);
+        user.setCreated(new Date());
+        return saveUser(user);
+    }
+
+    public User verifyUser(String email, String verificationKey)
+    {
+        User user = getUser(email);
+        user.setVerified(Boolean.TRUE);
         return saveUser(user);
     }
 

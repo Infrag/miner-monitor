@@ -39,7 +39,7 @@ import org.springframework.stereotype.Service;
  *
  * @author Ondrej.Bozek
  */
-@Service
+//@Service
 public class EmailService
 {
 

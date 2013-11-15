@@ -44,10 +44,22 @@
             <type>jar</type>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>  
+            <groupId>org.eclipse.persistence</groupId>  
+            <artifactId>javax.persistence</artifactId>  
+            <version>2.1.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency> 
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.5.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -107,6 +119,7 @@
             <artifactId>primefaces</artifactId>
             <version>4.0</version>
         </dependency>
+        
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
@@ -123,13 +136,15 @@
             <artifactId>Filter-Lib</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-            
-        <dependency>
+     
+        <!--        <dependency>
             <groupId>com.ning</groupId>
             <artifactId>async-http-client</artifactId>
             <version>1.7.20</version>
-        </dependency>
+        </dependency>-->
         
+            
+        <!--Logging-->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -151,6 +166,22 @@
             <version>${log4j.version}</version>
         </dependency>
         
+        <dependency>
+            <groupId>com.jolbox</groupId>
+            <artifactId>bonecp</artifactId>
+            <version>0.7.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jolbox</groupId>
+            <artifactId>bonecp-spring</artifactId>
+            <version>0.7.1.RELEASE</version>
+        </dependency>
+<!--        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
+            <version>2.5.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>-->
     </dependencies>
 
     <build>
@@ -246,6 +277,12 @@
             <id>spring-libs-milestone</id>
             <name>Spring Milestone Repository</name>
             <url>http://repo.springsource.org/milestone</url>
+        </repository>
+        <repository>
+            <url>http://download.eclipse.org/rt/eclipselink/maven.repo/</url>
+            <id>eclipselink</id>
+            <layout>default</layout>
+            <name>Repository for library EclipseLink (JPA 2.1)</name>
         </repository>
     </repositories>
 

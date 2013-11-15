@@ -52,6 +52,7 @@ public class User implements Serializable
     private List<UserRole> userRoles;
     private String password;
     private String salt;
+    private Boolean verified;
 
     public String getId()
     {
@@ -141,5 +142,15 @@ public class User implements Serializable
     public void setSalt(String salt)
     {
         this.salt = salt;
+    }
+
+    public Boolean getVerified()
+    {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified)
+    {
+        this.verified = verified;
     }
 }

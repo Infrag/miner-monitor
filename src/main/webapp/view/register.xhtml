@@ -1,12 +1,25 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Registration</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <h:form>
+            <p:panelGrid  columns="2">
+                <p:outputLabel value="E-mail" for="emailInput"/>
+                <p:inputText value="#{userRegistration.user.email}" id="emailInput"/>
+                <p:outputLabel value="Password" for="passwordInput"/>
+                <p:password value="#{userRegistration.user.password}" id="passwordInput" 
+                            feedback="true" required="true" match="passwordAgain"/>
+                <p:outputLabel value="Password again" for="passwordAgain"/>
+                <p:password value="#{userRegistration.user.password}" id="passwordAgain" feedback="false"/>
+            </p:panelGrid>
+            <p:commandButton value="Register" action="#{userRegistration.register()}"/>
+        </h:form>
     </h:body>
 </html>
 

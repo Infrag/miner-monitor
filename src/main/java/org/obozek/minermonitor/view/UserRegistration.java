@@ -34,10 +34,22 @@ public class UserRegistration
 
     @Autowired
     private UserService userService;
+    private User user;
 
-    private String register(User user)
+    public String register()
     {
         userService.registerUser(user);
+        userService.verifyUser(user.getEmail(), null);
         return "registered";
+    }
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
     }
 }
