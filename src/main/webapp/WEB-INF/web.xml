@@ -28,7 +28,7 @@
             adding a comma-separated list of them.
         </description>
         <param-name>com.ocpsoft.pretty.BASE_PACKAGES</param-name>
-        <param-value>com.asseco.olkdmvs.gateway</param-value>
+        <param-value>org.obozek.minermonitor</param-value>
     </context-param>
     <context-param>
         <description>
