@@ -14,7 +14,6 @@
  */
 package org.obozek.minermonitor.service;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import org.obozek.minermonitor.entities.User;
@@ -30,16 +29,14 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class UserService 
-{
+public class UserService {
 
     @Autowired
     private UserRepository repository;
     @Autowired
     private UserRoleService roleService;
 
-    public User registerUser(User user)
-    {
+    public User registerUser(User user) {
         user.setUserRoles(new ArrayList<UserRole>());
         // set default user role
         user.getUserRoles().add(roleService.getDefaultUserRole());
@@ -48,20 +45,32 @@ public class UserService
         return saveUser(user);
     }
 
-    public User verifyUser(String email, String verificationKey)
-    {
+    public User verifyUser(String email, String verificationKey) {
         User user = getUser(email);
         user.setVerified(Boolean.TRUE);
         return saveUser(user);
     }
 
-    public User saveUser(User user)
-    {
+    public User saveUser(User user) {
+        return repository.save(canonize(user));
+    }
+
+    @Transactional(readOnly = true)
+    public User getUser(String email) {
+        return repository.findByEmail(canonize(email));
+    }
+
+    // TODO canonization should be probably pushed to Repository layer
+    private User canonize(User user) {
+        user.setEmail(canonize(user.getEmail()));
         return user;
     }
 
-    public User getUser(String email)
-    {
-        return repository.getUserByEmail(email);
+    private String canonize(String string) {
+        if (string != null) {
+            return string.trim().toLowerCase();
+        }
+        return string;
     }
+
 }

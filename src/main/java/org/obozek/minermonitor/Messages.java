@@ -14,11 +14,8 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-public final class Messages
-{
+public final class Messages {
 
-    @Autowired
-    private FacesContext facesContext;
     @Autowired
     private MessageSource messageSource;
 
@@ -27,9 +24,8 @@ public final class Messages
      *
      * @return Faces associated locale
      */
-    private Locale getDefaultLocale()
-    {
-        return facesContext.getApplication().getDefaultLocale();
+    private Locale getDefaultLocale() {
+        return FacesContext.getCurrentInstance().getApplication().getDefaultLocale();
     }
 
     /**
@@ -44,8 +40,7 @@ public final class Messages
      * @see #getDefaultLocale
      * @see #getMessage(Locale, String, Object...)
      */
-    public String getMessage(String code, Object... args)
-    {
+    public String getMessage(String code, Object... args) {
         return getMessage(getDefaultLocale(), code, args);
     }
 
@@ -61,8 +56,7 @@ public final class Messages
      *
      * @see MessageSource#getMessage(String, Object[], Locale)
      */
-    public String getMessage(Locale locale, String code, Object... args)
-    {
+    public String getMessage(Locale locale, String code, Object... args) {
         return messageSource.getMessage(code, args, locale);
     }
 
@@ -78,8 +72,7 @@ public final class Messages
      * @see #getDefaultLocale
      * @see #getMessage(Locale, String, String, Object...)
      */
-    public String getMessageOrDefault(String code, String defaultMessage, Object... args)
-    {
+    public String getMessageOrDefault(String code, String defaultMessage, Object... args) {
         return getMessage(getDefaultLocale(), code, defaultMessage, args);
     }
 
@@ -95,8 +88,7 @@ public final class Messages
      *
      * @see MessageSource#getMessage(String, Object[], String, Locale)
      */
-    public String getMessageOrDefault(Locale locale, String code, String defaultMessage, Object... args)
-    {
+    public String getMessageOrDefault(Locale locale, String code, String defaultMessage, Object... args) {
         return messageSource.getMessage(code, args, defaultMessage, locale);
     }
 }

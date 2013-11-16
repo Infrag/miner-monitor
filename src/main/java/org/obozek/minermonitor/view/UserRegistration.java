@@ -29,27 +29,23 @@ import org.springframework.web.context.WebApplicationContext;
 @URLMapping(id = "Register", viewId = "/view/register.xhtml", pattern = "/register")
 @Component
 @Scope(WebApplicationContext.SCOPE_REQUEST)
-public class UserRegistration
-{
+public class UserRegistration {
 
     @Autowired
     private UserService userService;
-    private User user;
+    private User user = new User();
 
-    public String register()
-    {
-        userService.registerUser(user);
+    public String register() {
+        user = userService.registerUser(user);
         userService.verifyUser(user.getEmail(), null);
-        return "registered";
+        return "pretty:auth:index";
     }
 
-    public User getUser()
-    {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(User user)
-    {
+    public void setUser(User user) {
         this.user = user;
     }
 }

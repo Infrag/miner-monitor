@@ -6,13 +6,11 @@ package org.obozek.minermonitor.repository;
 
 import org.obozek.filterlib.PageFilter;
 import org.obozek.minermonitor.entities.UserRole;
-import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Ondrej.Bozek
  */
-@Repository
 public interface UserRoleRepository extends BaseRepository<UserRole, Long, PageFilter>
 {
 

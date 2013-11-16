@@ -20,7 +20,7 @@
     -->
     <ctx:annotation-config />
     <ctx:component-scan base-package="org.obozek.minermonitor"/>
-    <ctx:load-time-weaver />
+    <!--<ctx:load-time-weaver />-->
     
     
     <!--JSF 2 ViewScope Support-->
@@ -39,7 +39,7 @@
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:META-INF/jdbc.properties</value>
+                <value>classpath:META-INF/localJdbc.properties</value>
             </list>
         </property>
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
@@ -90,13 +90,13 @@
                 <entry key="eclipselink.logging.level.sql" value="FINEST"/>
                 <entry key="eclipselink.logging.parameters" value="true"/>
                 <entry key="eclipselink.target-database" value="${jdbc.db.platform}"/>
-                <entry key="eclipselink.ddl-generation" value="create-tables"/>
+                <entry key="javax.persistence.schema-generation.database.action" value="create"/>
             </map>
         </property>
         <!--<property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>-->  
-<!--        <property name="loadTimeWeaver">          
+        <property name="loadTimeWeaver">          
             <bean class="org.springframework.instrument.classloading.ReflectiveLoadTimeWeaver"/>  
-        </property>  -->
+        </property>  
         <property name="jpaDialect">
             <bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaDialect"/>
         </property>

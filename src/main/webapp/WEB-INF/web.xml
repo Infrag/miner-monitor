@@ -5,12 +5,22 @@
         <param-value>Development</param-value>
     </context-param>
     <context-param>
+        <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
+        <param-value>1</param-value>
+    </context-param>
+    <!-- reloading of pretty faces config   -->
+    <context-param>
+        <param-name>com.ocpsoft.pretty.DEVELOPMENT</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
         <description>
             Space separated list of Spring configuration files to load.
         </description>
         <param-name>contextConfigLocation</param-name>
         <param-value>
             /WEB-INF/application-config.xml
+            /WEB-INF/security-config.xml
         </param-value>
     </context-param>
     <context-param>
@@ -31,19 +41,23 @@
         <param-value>org.obozek.minermonitor</param-value>
     </context-param>
     <context-param>
-        <description>
-            Compatibility flag to tell the Orchestra that it's encodeUrl() method should
-            be used instead of the standard encodeRedirectUrl().
-        </description>
-        <param-name>com.ocpsoft.pretty.USE_ENCODE_URL_FOR_REDIRECTS</param-name>
-        <param-value>true</param-value>
-    </context-param>
-    <context-param>
         <param-name>primefaces.THEME</param-name>
         <param-value>bootstrap</param-value>
     </context-param>
-    
     <!-- Listeners ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>
+            org.springframework.web.filter.DelegatingFilterProxy
+        </filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>ERROR</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
     <listener>
         <description>
             Listener to initialize Spring framework's application context.
@@ -88,4 +102,7 @@
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>/index</welcome-file>
+    </welcome-file-list>
 </web-app>

@@ -33,14 +33,13 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(indexes = {
-    @Index(name = "EMAIL_INDEX", columnList = "email", unique = true)}, uniqueConstraints =
-        @UniqueConstraint(columnNames = {"email"}))
-public class User implements Serializable
-{
+    @Index(name = "EMAIL_INDEX", columnList = "email", unique = true)}, uniqueConstraints
+        = @UniqueConstraint(columnNames = {"email"}))
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     private String firstName;
     private String surName;
     private String email;
@@ -54,103 +53,83 @@ public class User implements Serializable
     private String salt;
     private Boolean verified;
 
-    public String getId()
-    {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id)
-    {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getFirstName()
-    {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName)
-    {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getSurName()
-    {
+    public String getSurName() {
         return surName;
     }
 
-    public void setSurName(String surName)
-    {
+    public void setSurName(String surName) {
         this.surName = surName;
     }
 
-    public String getEmail()
-    {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email)
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public List<UserRole> getUserRoles()
-    {
+    public List<UserRole> getUserRoles() {
         return userRoles;
     }
 
-    public void setUserRoles(List<UserRole> userRoles)
-    {
+    public void setUserRoles(List<UserRole> userRoles) {
         this.userRoles = userRoles;
     }
 
-    public Date getCreated()
-    {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(Date created)
-    {
+    public void setCreated(Date created) {
         this.created = created;
     }
 
-    public Date getLastAccess()
-    {
+    public Date getLastAccess() {
         return lastAccess;
     }
 
-    public void setLastAccess(Date lastAccess)
-    {
+    public void setLastAccess(Date lastAccess) {
         this.lastAccess = lastAccess;
     }
 
-    public String getPassword()
-    {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password)
-    {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getSalt()
-    {
+    public String getSalt() {
         return salt;
     }
 
-    public void setSalt(String salt)
-    {
+    public void setSalt(String salt) {
         this.salt = salt;
     }
 
-    public Boolean getVerified()
-    {
+    public Boolean getVerified() {
         return verified;
     }
 
-    public void setVerified(Boolean verified)
-    {
+    public void setVerified(Boolean verified) {
         this.verified = verified;
     }
 }

@@ -16,15 +16,13 @@ package org.obozek.minermonitor.repository;
 
 import org.obozek.filterlib.PageFilter;
 import org.obozek.minermonitor.entities.User;
-import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Ondrej.Bozek
  */
-@Repository
 public interface UserRepository extends BaseRepository<User, Long, PageFilter>
 {
 
-    User getUserByEmail(String email);
+    User findByEmail(String email);
 }

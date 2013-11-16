@@ -1,5 +1,6 @@
 package org.obozek.minermonitor.view;
 
+import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
@@ -14,6 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
  *
  * @author Ondrej.Bozek
  */
+@URLMapping(id = "auth:index", viewId = "/view/auth/index.xhtml", pattern = "/auth")
 @Component
 @Scope(WebApplicationContext.SCOPE_REQUEST)
 public class BackingBean implements Serializable

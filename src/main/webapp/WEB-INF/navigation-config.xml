@@ -2,5 +2,9 @@
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:schemaLocation="http://ocpsoft.com/prettyfaces	http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.3.xsd">
 
+    <url-mapping id="loginPage"> 
+        <pattern value="/login" /> 
+        <view-id value="/view/login.xhtml" />
+    </url-mapping>
  
 </pretty-config>
