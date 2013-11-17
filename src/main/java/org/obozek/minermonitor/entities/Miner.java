@@ -16,122 +16,121 @@ package org.obozek.minermonitor.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import org.obozek.minermonitor.model.RowKeyAccess;
 
 /**
  *
  * @author Ondrej.Bozek
  */
 @Entity
-public class Miner implements Serializable
-{
+@NamedQuery(name = "Miner.findStartedMiners", query = "SELECT m FROM Miner m WHERE m.enabled = TRUE")
+public class Miner implements Serializable, RowKeyAccess {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String hostName;
-    private String port;
+    private Integer port;
     private String minerName;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private User user;
     private Long checkIntervalMs;
     private Long deadCheckIntervalMs;
     private Boolean alive;
-    @OneToMany(mappedBy = "miner")
+    private Boolean enabled;
+    @OneToMany(mappedBy = "miner", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     private List<MinerCheck> minerChecks;
 
-    public Long getId()
-    {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id)
-    {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getHostName()
-    {
+    public String getHostName() {
         return hostName;
     }
 
-    public void setHostName(String hostName)
-    {
+    public void setHostName(String hostName) {
         this.hostName = hostName;
     }
 
-    public String getPort()
-    {
+    public Integer getPort() {
         return port;
     }
 
-    public void setPort(String port)
-    {
+    public void setPort(Integer port) {
         this.port = port;
     }
 
-    public String getMinerName()
-    {
+    public String getMinerName() {
         return minerName;
     }
 
-    public void setMinerName(String minerName)
-    {
+    public void setMinerName(String minerName) {
         this.minerName = minerName;
     }
 
-    public User getUser()
-    {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(User user)
-    {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public List<MinerCheck> getMinerChecks()
-    {
+    public List<MinerCheck> getMinerChecks() {
         return minerChecks;
     }
 
-    public void setMinerChecks(List<MinerCheck> minerChecks)
-    {
+    public void setMinerChecks(List<MinerCheck> minerChecks) {
         this.minerChecks = minerChecks;
     }
 
-    public Long getCheckIntervalMs()
-    {
+    public Long getCheckIntervalMs() {
         return checkIntervalMs;
     }
 
-    public void setCheckIntervalMs(Long checkIntervalMs)
-    {
+    public void setCheckIntervalMs(Long checkIntervalMs) {
         this.checkIntervalMs = checkIntervalMs;
     }
 
-    public Long getDeadCheckIntervalMs()
-    {
+    public Long getDeadCheckIntervalMs() {
         return deadCheckIntervalMs;
     }
 
-    public void setDeadCheckIntervalMs(Long deadCheckIntervalMs)
-    {
+    public void setDeadCheckIntervalMs(Long deadCheckIntervalMs) {
         this.deadCheckIntervalMs = deadCheckIntervalMs;
     }
 
-    public Boolean getAlive()
-    {
+    public Boolean getAlive() {
         return alive;
     }
 
-    public void setAlive(Boolean alive)
-    {
+    public void setAlive(Boolean alive) {
         this.alive = alive;
+    }
+
+    @Override
+    public String getRowKey() {
+        return getId().toString();
+    }
+
+    public Boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

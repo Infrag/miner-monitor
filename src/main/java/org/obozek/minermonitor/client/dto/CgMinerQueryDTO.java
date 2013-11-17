@@ -17,31 +17,27 @@ package org.obozek.minermonitor.client.dto;
 /**
  *
  * @author Ondrej.Bozek
+ * @param <T>
  */
-public class CgMinerQueryDTO
-{
+public class CgMinerQueryDTO<T extends CgMinerResponse> {
 
     private CgMinerCmdEnum command;
     private String parameter;
 
-    public CgMinerQueryDTO(CgMinerCmdEnum command)
-    {
+    public CgMinerQueryDTO(CgMinerCmdEnum command) {
         this(command, null);
     }
 
-    public CgMinerQueryDTO(CgMinerCmdEnum command, String parameter)
-    {
+    public CgMinerQueryDTO(CgMinerCmdEnum command, String parameter) {
         this.command = command;
         this.parameter = parameter;
     }
 
-    public CgMinerCmdEnum getCommand()
-    {
+    public CgMinerCmdEnum getCommand() {
         return command;
     }
 
-    public String getParameter()
-    {
+    public String getParameter() {
         return parameter;
     }
 }

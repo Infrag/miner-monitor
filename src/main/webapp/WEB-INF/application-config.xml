@@ -146,4 +146,8 @@
                        entity-manager-factory-ref="entityManagerFactory"
                        transaction-manager-ref="transactionManager"
                        factory-class="org.obozek.minermonitor.repository.BaseRepositoryFactoryBean"/>
+    
+    <!--Scheduling-->    
+    <task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
+    <task:scheduler id="myScheduler" pool-size="100"/>}
 </beans>

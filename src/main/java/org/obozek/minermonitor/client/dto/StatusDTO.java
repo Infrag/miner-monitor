@@ -15,7 +15,9 @@
 package org.obozek.minermonitor.client.dto;
 
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Embeddable;
 
 /**
  * {"STATUS":"S","When":1384251030,"Code":11,"Msg":"Summary","Description":"cgminer
@@ -23,8 +25,8 @@ import java.util.Date;
  *
  * @author Ondrej.Bozek
  */
-public class Status
-{
+@Embeddable
+public class StatusDTO implements Serializable {
 
     @SerializedName("STATUS")
     private StatusState status;
@@ -33,12 +35,10 @@ public class Status
     private String msg;
     private String description;
 
-    public Status()
-    {
+    public StatusDTO() {
     }
 
-    public Status(StatusState status, Date when, Integer code, String msg, String description)
-    {
+    public StatusDTO(StatusState status, Date when, Integer code, String msg, String description) {
         this.status = status;
         this.when = when;
         this.code = code;
@@ -46,28 +46,23 @@ public class Status
         this.description = description;
     }
 
-    public StatusState getStatus()
-    {
+    public StatusState getStatus() {
         return status;
     }
 
-    public Date getWhen()
-    {
+    public Date getWhen() {
         return when;
     }
 
-    public Integer getCode()
-    {
+    public Integer getCode() {
         return code;
     }
 
-    public String getMsg()
-    {
+    public String getMsg() {
         return msg;
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 }

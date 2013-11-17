@@ -5,13 +5,13 @@
 package org.obozek.minermonitor.client;
 
 import org.obozek.minermonitor.client.dto.CgMinerQueryDTO;
+import org.obozek.minermonitor.client.dto.CgMinerResponse;
 
 /**
  *
  * @author Ondrej.Bozek
  */
-public interface CgMinerClient
-{
+public interface CgMinerClient {
 
-    public String queryCgMiner(String host, int port, CgMinerQueryDTO command);
+    public <T extends CgMinerResponse> T queryCgMiner(String host, int port, CgMinerQueryDTO<T> command);
 }

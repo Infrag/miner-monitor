@@ -18,12 +18,12 @@ package org.obozek.minermonitor.client.dto;
  *
  * @author Ondrej.Bozek
  */
-public enum StatusState
-{
+public enum StatusState {
 
     W, // - Warning
     I, // - Informational
     S, // - Success
     E, // - Error
-    F;// - Fatal (code bug)
+    T, // - Timeout (no connection)
+    F; // - Fatal (code bug)
 }

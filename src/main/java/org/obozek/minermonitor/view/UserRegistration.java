@@ -17,6 +17,7 @@ package org.obozek.minermonitor.view;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import org.obozek.minermonitor.entities.User;
 import org.obozek.minermonitor.service.UserService;
+import static org.obozek.minermonitor.view.Navigation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -38,7 +39,7 @@ public class UserRegistration {
     public String register() {
         user = userService.registerUser(user);
         userService.verifyUser(user.getEmail(), null);
-        return "pretty:auth:index";
+        return getPretty(MINER_MANAGEMENT);
     }
 
     public User getUser() {

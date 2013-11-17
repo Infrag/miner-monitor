@@ -8,6 +8,10 @@
         <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
         <param-value>1</param-value>
     </context-param>
+    <context-param>
+        <param-name>facelets.FACELETS_REFRESH_PERIOD</param-name>
+        <param-value>1</param-value>
+    </context-param>
     <!-- reloading of pretty faces config   -->
     <context-param>
         <param-name>com.ocpsoft.pretty.DEVELOPMENT</param-name>
@@ -51,12 +55,11 @@
             org.springframework.web.filter.DelegatingFilterProxy
         </filter-class>
     </filter>
-
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
-        <dispatcher>ERROR</dispatcher>
         <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
     </filter-mapping>
     <listener>
         <description>
@@ -103,6 +106,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>/index</welcome-file>
+        <welcome-file>/</welcome-file>
     </welcome-file-list>
 </web-app>

@@ -1,0 +1,567 @@
+body {
+    background-color: whitesmoke;
+    font-size: 12px;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color: #000000;  
+    margin: 10px;
+    margin: 0px auto;
+    width: 1000px;
+    margin-bottom: 0px;
+}
+
+#body {
+}
+
+#ie6 #body { height: 1300px; }
+
+h1 {
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    font-size:  18px;
+    font-weight: bold;
+    color: olive;
+}
+
+a:link, a:visited {
+    color: #045491;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+a:link:hover, a:visited:hover  {
+    color: #045491;
+    font-weight : bold;
+    text-decoration : underline;
+}
+
+.blockLink, .blockLink:visited, .blockLink:hover,.blockLink:link, .blockLink:active, .blockLink:link:hover, .blockLink:visited:hover {
+    display: block;
+    position: relative;
+    /*background-color: #c2dfef;*/
+    font-size: 12px;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color: #000000;  
+    text-decoration: none;
+    font-weight: normal;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+}
+.blockLink:hover, .blockLink:link:hover, .blockLink:visited:hover{
+    background-color: #e5f3f5;
+}
+
+.blocklink input{
+    vertical-align: top;
+}
+
+.formfill .iceCmdLnk-dis, .formfill .iceOutLnk-dis{
+    border: none;
+}
+.formfill {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.removeLink {
+    display: block;
+    border-left: 1px dashed #cccccc;
+    border-bottom: 1px dashed #cccccc;
+    width: 24px;
+    height: 24px;
+    float: right;
+    position: relative;
+    margin: 4px;
+    z-index: 1;
+}
+.removeLink:hover {
+    background-image: url("/resources/images/cross_24-1.png");
+    /*border: none;*/
+}
+
+.iceSelOneRb, .iceSelMnyCb {
+    padding: 0px;
+    margin: 0px;
+    border-spacing: 0px;
+}
+
+/* float clearing for IE6 */
+* html .clearfix{
+    height: 1%;
+    overflow: visible;
+}
+
+/* float clearing for IE7 */
+*+html .clearfix{
+    min-height: 1%;
+}
+
+/* float clearing for everyone else */
+.clearfix:after{
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    font-size: 0;
+}
+
+.segmentConf label {
+    display: block;
+}
+.segmentConf .iceInpTxt {
+    width:250px;
+}
+
+.container, .container:hover {
+    border-top: whitesmoke 1px dotted;
+    border-left: whitesmoke 1px dotted;
+    border-bottom: whitesmoke 1px dotted;
+    margin-left: 5px;
+    position: relative;
+}
+.container:hover, .container.over {
+    /*    border-top-color: #000000 ;
+        border-bottom-color: #d9d4d4 ;*/
+    border-left-color: #d9d4d4 ;
+}
+
+.inputText,.inputText:hover {
+    border:none;
+}
+
+.description {
+    max-width: 400px;
+    font-style: italic;
+    clear: both;
+    display: block;
+    font-size: 11px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+.root.description {
+    font-size: 13px;
+    margin-left: 5px;
+}
+
+.container.description {
+    font-size: 12px;
+}
+
+
+.checkBox fieldset {
+    border: none;
+}
+.label {
+    width: 150px;
+    float: left;
+    margin-top:5px;
+    position:relative;
+}
+
+.longLabel {
+    min-width:500px;
+    float: left;
+    margin-top:5px;
+    margin-bottom: 5px;
+    position:relative;
+    margin-left: 3px;
+}
+
+
+.inputText .iceInpTxt{
+    width: 175px;
+}
+
+.rootLabel, .container.label {
+    margin-left: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.rootLabel {
+    font-size: 16px;
+    margin: 8px;
+    width:500px;
+}
+
+
+.iceSelOneRb label {
+    display: inline;
+}
+
+.insert {
+    padding-left: 5px;
+}
+.dropTarget {
+    height: 10px;
+}
+
+.dropTarget.over {
+    height:50px;
+    background-color: yellow;
+
+}
+
+
+/* HEADER **************************/
+#header {
+    margin: 0px auto;
+    width: 900px;
+    height: 80px;
+    position: relative;
+    background-color: burlywood;
+}
+
+#header #slogan {
+    position: absolute;
+    top: 80px;
+    left: 330px;
+}
+
+#header #topNav {
+    float: left;
+    width: 650px;
+    height: 73px;
+    position: absolute;
+    bottom: 0;
+}
+
+.userBox {
+    display:block;
+    float:right;
+    clear: both;
+    width: 282px;
+}
+
+#header #topNav #breadcrumb {
+    font-size: 10px;
+    color: #fff;
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    z-index: 1;
+}
+
+#wrapper {
+}
+
+#header h1 {
+    margin:0; padding:0;
+    position:absolute;
+    overflow:hidden;
+    font-size: 0px;
+    z-index: 1;
+    left:62px;
+    top:137px;
+    width:272px;
+    height:96px;
+}
+
+#header h1 span {
+    display:block;
+    position:absolute;
+    z-index:1;
+    margin:0;
+    padding:0;
+    top: 0px;
+    left: 0px;
+    width:100%;
+    height:100%;
+    text-decoration: none;
+}
+
+#wrapper.home #header h1  {
+}
+
+#wrapper.home #header h1 span {
+}
+
+#header ul {
+    list-style: none;
+}
+
+#header #topContact {
+    float: right;
+    color: #fff;
+    font-size: 11px;
+    padding: 0 0 0 0;
+}
+
+#header #topContact .contact {
+    float: left;
+    width: 250px;
+    padding: 10px 5px 3px 5px;
+}
+
+#header #topContact .contact p {
+    float: left;
+    display: block;
+    padding-left: 10px;
+}
+
+#header #topContact p a {
+    font-weight: normal;
+}
+
+#header #topContact .flags {
+    float: left;
+    width: 20px;
+    padding: 5px 5px 3px 5px;
+    padding-top: 0px;
+}
+
+#ie6 #header #topContact .flags { width: 30px; }
+
+#header #topContact .flags img {
+    padding: 1px 0 2px 0;
+}
+
+#header #topContact .login,
+#content .login{
+    width: 183px;
+    position: relative;
+}
+#header #topContact .login{
+    float: left;
+    background: url('images/topContact_bck.jpg') repeat-y right top;
+    padding: 10px 0 10px 30px;
+}
+#content .login {
+    padding: 10px 0 10px 30px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    display:block;
+    background: rgb(0, 0, 0);
+    /* RGBa with 0.6 opacity */
+    background: rgba(0, 0, 0, 0.4);
+    /* For IE 5.5 - 7*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#66000000);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#66000000)";
+}
+
+#ie6 #header #topContact .login { width: 213px; height: 104px; }
+
+#header #topContact .login-bottom{
+    width: 213px;
+    height: 14px;
+    position: absolute;
+    bottom: -14px;
+    left: 0px;
+    z-index: 1;
+}
+
+#header #topContact .login input {
+    margin: 0 5px 5px 0;
+}
+
+#header ul {
+    float: left;
+    position: absolute;
+    left: 2px;
+    top: 12px;
+    /* border-left: #4a1502 solid 1px;
+     border-right: #4a1502 solid 1px;*/
+}
+
+#header ul li {
+    float: left;
+
+    /*background: url('images/li_odd_right.jpg') no-repeat right top;*/
+}
+
+#header ul li:hover {
+    background-color: #444444;
+}
+
+#header ul li.even {
+    /*background: url('images/li_even_right.jpg') no-repeat right top;*/
+}
+
+#header ul li a {
+    display: block;
+    float: left;
+    padding: 10px 5px 8px 15px;
+    border-left: 1px dashed #FFF;
+    border-bottom: 1px dashed #FFF;
+    margin-right: 10px;
+    font-size: 13px;
+    color: #fff;
+    font-weight: normal;
+}
+
+#header ul li.even a {
+}
+
+/* konec hlavicky ************************************************************/    
+
+
+/*  buttons  */
+.buttons a, .draggableFormElement input.iceCmdBtn{
+    display:block;
+    /*float:left;*/
+    margin:0 7px 0 0;
+    background-color:whitesmoke;
+    border:1px solid #bfbfbf;/*
+    border-top:1px solid #eee;
+    border-left:1px solid #eee;*/
+
+    font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+    font-size:12px;
+    line-height:130%;
+    text-decoration:none;
+    font-weight:bold;
+    color:#565656;
+    cursor:pointer;
+    padding:5px 10px 6px 7px; /* Links */
+}
+.draggableFormElement input.iceCmdBtn{
+    width:auto;
+    /*overflow:visible;*/
+    width: 150px;
+    margin: 5px;
+    padding:4px 10px 3px 7px; /* IE6 */
+}
+.draggableFormElement input.iceCmdBtn[type]{
+    padding:5px 10px 5px 7px; /* Firefox */
+    line-height:17px; /* Safari */
+}
+*:first-child+html input.iceCmdBtn[type]{
+    padding:4px 10px 3px 7px; /* IE7 */
+}
+.draggableFormElement input.iceCmdBtn img, .draggableFormElement a img{
+    margin:0 3px -3px 0 !important;
+    padding:0;
+    border:none;
+    width:16px;
+    height:16px;
+}
+
+/* STANDARD */
+
+.draggableFormElement input.iceCmdBtn:hover, .draggableFormElement a:hover{
+    background-color:#dff4ff;
+    border:1px solid #c2e1ef;
+    color:#336699;
+}
+.draggableFormElement a:active{
+    background-color:#6299c5;
+    border:1px solid #6299c5;
+    color:#fff;
+}
+
+/* POSITIVE */
+
+.draggableFormElement input.positive, .draggableFormElement a.positive{
+    color:#529214;
+}
+.draggableFormElement a.positive:hover,.draggableFormElement input.positive:hover{
+    background-color:#E6EFC2;
+    border:1px solid #C6D880;
+    color:#529214;
+}
+.draggableFormElement a.positive:active{
+    background-color:#529214;
+    border:1px solid #529214;
+    color:#fff;
+}
+
+/* NEGATIVE */
+
+.draggableFormElement a.negative,.draggableFormElement input.negative{
+    color:#d12f19;
+}
+.draggableFormElement a.negative:hover,.draggableFormElement input.negative:hover{
+    background:#fbe3e4;
+    border:1px solid #fbc2c4;
+    color:#d12f19;
+}
+.draggableFormElement a.negative:active{
+    background-color:#d12f19;
+    border:1px solid #d12f19;
+    color:#fff;
+}
+
+/* REGULAR */
+
+input.regular, .draggableFormElement a.regular{
+    color:#336699;
+}
+.draggableFormElement a.regular:hover,.draggableFormElement input.regular:hover{
+    background-color:#dff4ff;
+    border:1px solid #c2e1ef;
+    color:#336699;
+}
+.draggableFormElement a.regular:active{
+    background-color:#6299c5;
+    border:1px solid #6299c5;
+    color:#fff;
+}
+
+/* Prevent the text contents of draggable elements from being selectable. */
+*[draggable=true] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -khtml-user-drag: element;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: move;
+    display: block;
+}
+.draggableFormElement
+{
+    position: relative;
+    min-height: 30px;
+    border: 1px dashed #bfbfbf;
+    margin: 0.25em;
+    background-color: #e5f3f5;
+    /*    padding: 0.25em;
+        cursor: pointer;*/
+}
+.draggableFormElement:hover {
+    background-color: white;
+}
+
+.draggableFormElement input {
+    width: 150px;
+    padding: 3px;
+    margin: 5px;
+}
+
+.mycoverStyle fieldset {
+    padding: 0px;
+    margin: 0px;
+    border: none 0px transparent;
+    display: inline;
+}
+
+/* INPUT TEXT AREA */
+.inputTextArray a textarea.iceInpTxtArea {
+    width: 200px;
+    height: 100px;
+}
+
+/* CONFIG PANELS */ 
+fieldset {
+    border: 2px groove #C2E1EF;
+}
+
+/* Form View */
+.formContent {
+    min-height: 300px;
+}
+
+/* Form Embed*/
+.embedBody {
+    background-color: white;
+    margin: 0px 0px;
+    width: 600px;
+}
+
+.embedBody #bottom {
+    width: 600px;
+    margin: 0px;
+}

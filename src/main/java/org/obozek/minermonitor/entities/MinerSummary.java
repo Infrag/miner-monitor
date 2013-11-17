@@ -22,215 +22,225 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import org.obozek.minermonitor.client.dto.CgMinerResponse;
+import org.obozek.minermonitor.client.dto.CgMinerSummary;
+import org.obozek.minermonitor.client.dto.StatusDTO;
+import org.obozek.minermonitor.client.dto.SummaryDTO;
 
 /**
  *
  * @author Ondrej.Bozek
  */
 @Entity
-public class MinerSummary implements Serializable
-{
+public class MinerSummary implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer elapsed;
-    private Double mhsAverage;
-    private Double mhs5s;
-    private Long foundBlocks;
-    private Long getworks;
-    private Long accepted;
-    private Long rejected;
-    private Long hwErrors;
-    private Double utility;
-    private Double difficultyAccepted;
-    private Long bestShare;
-    private Double deviceHardaware;
-    private Double deviceRejected;
-    private Double poolRejected;
-    private Double poolStale;
+    private Integer elapsed = 0;
+    private Double mhsAverage = 0D;
+    private Double mhs5s = 0D;
+    private Long foundBlocks = 0L;
+    private Long getworks = 0L;
+    private Long accepted = 0L;
+    private Long rejected = 0L;
+    private Long hwErrors = 0L;
+    private Double utility = 0D;
+    private Double difficultyAccepted = 0D;
+    private Long bestShare = 0L;
+    private Double deviceHardaware = 0D;
+    private Double deviceRejected = 0D;
+    private Double poolRejected = 0D;
+    private Double poolStale = 0D;
+    private StatusDTO status;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date timeAcquired;
+    private Long queryLag;
     @ManyToOne
     private Miner miner;
 
-    public Long getId()
-    {
+    public MinerSummary(CgMinerResponse response, Long queryLag) {
+        this.status = response.getStatus().get(0);
+        this.timeAcquired = new Date();
+        this.queryLag = queryLag;
+        if (response instanceof CgMinerSummary) {
+            SummaryDTO summary = ((CgMinerSummary) response).getSummary().get(0);
+            this.accepted = summary.getAccepted();
+            this.bestShare = summary.getBestShare();
+            this.deviceHardaware = summary.getDeviceHardaware();
+            this.deviceRejected = summary.getDeviceRejected();
+            this.difficultyAccepted = summary.getDifficultyAccepted();
+            this.elapsed = summary.getElapsed();
+            this.foundBlocks = summary.getFoundBlocks();
+            this.getworks = summary.getGetworks();
+            this.hwErrors = summary.getHwErrors();
+            this.mhs5s = summary.getMhs5s();
+            this.mhsAverage = summary.getMhsAverage();
+            this.poolRejected = summary.getPoolRejected();
+            this.poolStale = summary.getPoolStale();
+            this.rejected = summary.getRejected();
+            this.utility = summary.getUtility();
+        }
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id)
-    {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getElapsed()
-    {
+    public Integer getElapsed() {
         return elapsed;
     }
 
-    public void setElapsed(Integer elapsed)
-    {
+    public void setElapsed(Integer elapsed) {
         this.elapsed = elapsed;
     }
 
-    public Double getMhsAverage()
-    {
+    public Double getMhsAverage() {
         return mhsAverage;
     }
 
-    public void setMhsAverage(Double mhsAverage)
-    {
+    public void setMhsAverage(Double mhsAverage) {
         this.mhsAverage = mhsAverage;
     }
 
-    public Double getMhs5s()
-    {
+    public Double getMhs5s() {
         return mhs5s;
     }
 
-    public void setMhs5s(Double mhs5s)
-    {
+    public void setMhs5s(Double mhs5s) {
         this.mhs5s = mhs5s;
     }
 
-    public Long getFoundBlocks()
-    {
+    public Long getFoundBlocks() {
         return foundBlocks;
     }
 
-    public void setFoundBlocks(Long foundBlocks)
-    {
+    public void setFoundBlocks(Long foundBlocks) {
         this.foundBlocks = foundBlocks;
     }
 
-    public Long getGetworks()
-    {
+    public Long getGetworks() {
         return getworks;
     }
 
-    public void setGetworks(Long getworks)
-    {
+    public void setGetworks(Long getworks) {
         this.getworks = getworks;
     }
 
-    public Long getAccepted()
-    {
+    public Long getAccepted() {
         return accepted;
     }
 
-    public void setAccepted(Long accepted)
-    {
+    public void setAccepted(Long accepted) {
         this.accepted = accepted;
     }
 
-    public Long getRejected()
-    {
+    public Long getRejected() {
         return rejected;
     }
 
-    public void setRejected(Long rejected)
-    {
+    public void setRejected(Long rejected) {
         this.rejected = rejected;
     }
 
-    public Long getHwErrors()
-    {
+    public Long getHwErrors() {
         return hwErrors;
     }
 
-    public void setHwErrors(Long hwErrors)
-    {
+    public void setHwErrors(Long hwErrors) {
         this.hwErrors = hwErrors;
     }
 
-    public Double getUtility()
-    {
+    public Double getUtility() {
         return utility;
     }
 
-    public void setUtility(Double utility)
-    {
+    public void setUtility(Double utility) {
         this.utility = utility;
     }
 
-    public Double getDifficultyAccepted()
-    {
+    public Double getDifficultyAccepted() {
         return difficultyAccepted;
     }
 
-    public void setDifficultyAccepted(Double difficultyAccepted)
-    {
+    public void setDifficultyAccepted(Double difficultyAccepted) {
         this.difficultyAccepted = difficultyAccepted;
     }
 
-    public Long getBestShare()
-    {
+    public Long getBestShare() {
         return bestShare;
     }
 
-    public void setBestShare(Long bestShare)
-    {
+    public void setBestShare(Long bestShare) {
         this.bestShare = bestShare;
     }
 
-    public Double getDeviceHardaware()
-    {
+    public Double getDeviceHardaware() {
         return deviceHardaware;
     }
 
-    public void setDeviceHardaware(Double deviceHardaware)
-    {
+    public void setDeviceHardaware(Double deviceHardaware) {
         this.deviceHardaware = deviceHardaware;
     }
 
-    public Double getDeviceRejected()
-    {
+    public Double getDeviceRejected() {
         return deviceRejected;
     }
 
-    public void setDeviceRejected(Double deviceRejected)
-    {
+    public void setDeviceRejected(Double deviceRejected) {
         this.deviceRejected = deviceRejected;
     }
 
-    public Double getPoolRejected()
-    {
+    public Double getPoolRejected() {
         return poolRejected;
     }
 
-    public void setPoolRejected(Double poolRejected)
-    {
+    public void setPoolRejected(Double poolRejected) {
         this.poolRejected = poolRejected;
     }
 
-    public Double getPoolStale()
-    {
+    public Double getPoolStale() {
         return poolStale;
     }
 
-    public void setPoolStale(Double poolStale)
-    {
+    public void setPoolStale(Double poolStale) {
         this.poolStale = poolStale;
     }
 
-    public Date getTimeAcquired()
-    {
+    public Date getTimeAcquired() {
         return timeAcquired;
     }
 
-    public void setTimeAcquired(Date timeAcquired)
-    {
+    public void setTimeAcquired(Date timeAcquired) {
         this.timeAcquired = timeAcquired;
     }
 
-    public Miner getMiner()
-    {
+    public Miner getMiner() {
         return miner;
     }
 
-    public void setMiner(Miner miner)
-    {
+    public void setMiner(Miner miner) {
         this.miner = miner;
     }
+
+    public StatusDTO getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusDTO status) {
+        this.status = status;
+    }
+
+    public Long getQueryLag() {
+        return queryLag;
+    }
+
+    public void setQueryLag(Long queryLag) {
+        this.queryLag = queryLag;
+    }
+
 }

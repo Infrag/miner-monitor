@@ -18,8 +18,28 @@ package org.obozek.minermonitor.client.dto;
  *
  * @author Ondrej.Bozek
  */
-public enum CgMinerCmdEnum
-{
+public enum CgMinerCmdEnum {
 
-    summary, version, config, pools, devs, devdetails, pga, pgacount, notify, stats, coin;
+    summary(CgMinerSummary.class),
+    version(CgMinerResponse.class),
+    config(CgMinerResponse.class),
+    pools(CgMinerResponse.class),
+    devs(CgMinerResponse.class),
+    devdetails(CgMinerResponse.class),
+    pga(CgMinerResponse.class),
+    pgacount(CgMinerResponse.class),
+    notify(CgMinerResponse.class),
+    stats(CgMinerResponse.class),
+    coin(CgMinerResponse.class);
+
+    public Class<? extends CgMinerResponse> clazz;
+
+    private CgMinerCmdEnum(Class<? extends CgMinerResponse> clazz) {
+        this.clazz = clazz;
+    }
+
+    public Class<? extends CgMinerResponse> getClazz() {
+        return clazz;
+    }
+
 }

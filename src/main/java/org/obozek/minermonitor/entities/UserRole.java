@@ -14,8 +14,11 @@
  */
 package org.obozek.minermonitor.entities;
 
+import com.sun.istack.internal.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,6 +41,9 @@ public class UserRole implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @Column(nullable = false)
+    @Basic(optional = false)
     private String roleName;
 
 

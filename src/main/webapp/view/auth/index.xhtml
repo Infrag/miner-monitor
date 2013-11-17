@@ -1,24 +1,37 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <h:form>
-            <h:panelGrid columns="2">
-                Summary: <h:outputText value="#{backingBean.summary}"/>
-
-                host: <h:inputText value="#{backingBean.url}"/>
-                port: <h:inputText value="#{backingBean.port}"/>
-            </h:panelGrid>
-            <h:commandButton action="#{backingBean.refreshSummary}" value="Refresh"/>
-            <h:commandButton action="#{backingBean.queryConfig()}" value="config"/>
-            <h:commandButton action="#{backingBean.queryDeviceDetails()}" value="deviceDetails"/>
-            <h:commandButton action="#{backingBean.queryDevices()}" value="devices"/>
-            <h:commandButton action="#{backingBean.queryNotify()}" value="notify"/>
-        </h:form>
-    </h:body>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <body>
+        <ui:composition template="/resources/templates/mainTemplate.xhtml">
+            <ui:define name="title">
+                <title>Manage your miners</title>
+            </ui:define>
+            <ui:define name="content">
+                <p:dataTable value="#{minerManagement.dataModel}" var="miner" 
+                             lazy="true" paginator="true" rows="20">
+                    <p:column headerText="Miner name" sortBy="minerName">
+                        <h:outputText value="#{miner.minerName}"/>
+                    </p:column>
+                    <p:column headerText="Miner location" sortBy="hostName">
+                        <h:outputText value="#{miner.hostName}"/>
+                    </p:column>
+                    <p:column headerText="Miner alive" sortBy="hostName">
+                        <p:selectBooleanCheckbox value="#{miner.alive}" 
+                                                 style="#{!miner.alive ?'background-color:red':''}"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton action="pretty:auth:AddMiner" value="Add miner"/>
+            </ui:define>
+            <ui:define name="right">
+            </ui:define>
+            <ui:define name="bottom">
+            </ui:define>
+        </ui:composition>
+    </body>
 </html>
 

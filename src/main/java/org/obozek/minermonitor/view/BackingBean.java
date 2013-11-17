@@ -15,7 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
  *
  * @author Ondrej.Bozek
  */
-@URLMapping(id = "auth:index", viewId = "/view/auth/index.xhtml", pattern = "/auth")
+@URLMapping(id = "auth:test", viewId = "/view/auth/index.xhtml", pattern = "/auth/test")
 @Component
 @Scope(WebApplicationContext.SCOPE_REQUEST)
 public class BackingBean implements Serializable
@@ -30,7 +30,7 @@ public class BackingBean implements Serializable
     public String refreshSummary()
     {
         try {
-            summary = cgMinerService.getSummary(url, port);
+//            summary = cgMinerService.getSummary(url, port);
         } catch (Exception ex) {
             throwMessage(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
         }
@@ -40,7 +40,7 @@ public class BackingBean implements Serializable
     public String queryConfig()
     {
         try {
-            summary = cgMinerService.getConfig(url, port);
+//            summary = cgMinerService.getConfig(url, port);
         } catch (Exception ex) {
             throwMessage(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
         }
@@ -50,7 +50,7 @@ public class BackingBean implements Serializable
     public String queryDeviceDetails()
     {
         try {
-            summary = cgMinerService.getDeviceDetails(url, port);
+//            summary = cgMinerService.getDeviceDetails(url, port);
         } catch (Exception ex) {
             throwMessage(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
         }
@@ -60,7 +60,7 @@ public class BackingBean implements Serializable
     public String queryNotify()
     {
         try {
-            summary = cgMinerService.getNotify(url, port);
+//            summary = cgMinerService.getNotify(url, port);
         } catch (Exception ex) {
             throwMessage(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
         }
@@ -70,7 +70,7 @@ public class BackingBean implements Serializable
     public String queryDevices()
     {
         try {
-            summary = cgMinerService.getDevices(url, port);
+//            summary = cgMinerService.getDevices(url, port);
         } catch (Exception ex) {
             throwMessage(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
         }

@@ -28,7 +28,7 @@ import com.google.gson.annotations.SerializedName;
  *
  * @author Ondrej.Bozek
  */
-public class Summary
+public class SummaryDTO
 {
 
     private Integer elapsed;
@@ -57,7 +57,7 @@ public class Summary
     @SerializedName("Pool Stale%")
     private Double poolStale;
 
-    public Summary(Integer elapsed, Double mhsAverage, Double mhs5s, Long foundBlocks,
+    public SummaryDTO(Integer elapsed, Double mhsAverage, Double mhs5s, Long foundBlocks,
             Long getworks, Long accepted, Long rejected, Long hwErrors, Double utility,
             Double difficultyAccepted, Long bestShare, Double deviceHardaware,
             Double deviceRejected, Double poolRejected, Double poolStale)
@@ -79,7 +79,7 @@ public class Summary
         this.poolStale = poolStale;
     }
 
-    public Summary()
+    public SummaryDTO()
     {
     }
 

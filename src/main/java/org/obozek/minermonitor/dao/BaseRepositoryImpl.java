@@ -15,7 +15,10 @@
 package org.obozek.minermonitor.dao;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.EntityManager;
+import org.obozek.filterlib.AbstractFilteringRepository;
 import org.obozek.filterlib.EntityManagerFilteringRepository;
 import org.obozek.filterlib.FilteringRepository;
 import org.obozek.filterlib.PageFilter;
@@ -33,16 +36,22 @@ import org.springframework.data.repository.NoRepositoryBean;
  */
 @NoRepositoryBean
 public class BaseRepositoryImpl<T, ID extends Serializable, U extends PageFilter>
-        extends SimpleJpaRepository<T, ID> implements FilteringRepository<T, U, Page<T>>
-{
+        extends SimpleJpaRepository<T, ID> implements FilteringRepository<T, U, Page<T>> {
 
     private EntityManager entityManager;
     private EntityManagerFilteringRepository<T, Pageable> filteringRepository;
 
+    static {
+        Set<String> ignored = new HashSet<>();
+        ignored.add("page");
+        ignored.add("count");
+        ignored.add("start");
+        AbstractFilteringRepository.setIgnoredFields(ignored);
+    }
+
     // There are two constructors to choose from, either can be used.
     public BaseRepositoryImpl(Class<T> domainClass, EntityManager entityManager,
-            PreFilterAccessor preFilterAccessor)
-    {
+            PreFilterAccessor preFilterAccessor) {
         super(domainClass, entityManager);
         // This is the recommended method for accessing inherited class dependencies.
         this.entityManager = entityManager;
@@ -51,8 +60,7 @@ public class BaseRepositoryImpl<T, ID extends Serializable, U extends PageFilter
     }
 
     public BaseRepositoryImpl(JpaEntityInformation<T, ID> entityInformation,
-            EntityManager entityManager, PreFilterAccessor preFilterAccessor)
-    {
+            EntityManager entityManager, PreFilterAccessor preFilterAccessor) {
         super(entityInformation, entityManager);
         // This is the recommended method for accessing inherited class dependencies.
         this.entityManager = entityManager;
@@ -61,8 +69,7 @@ public class BaseRepositoryImpl<T, ID extends Serializable, U extends PageFilter
     }
 
     @Override
-    public Page<T> filter(U filter)
-    {
+    public Page<T> filter(U filter) {
         Page<T> page = filteringRepository.filter(filter);
         return page;
     }

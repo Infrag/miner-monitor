@@ -65,9 +65,8 @@ public class EmailService
      * @param zadostDTO
      * @param porizovatele
      */
-//    public void sendNovaZadostToPorizovatel(VydejZadostDTO zadostDTO, List<PorizovatelDTO> porizovatele)
-//            throws MailException, MessagingException
-//    {
+//    public void sendMinerIsOffline(VydejZadostDTO zadostDTO, List<PorizovatelDTO> porizovatele)
+//            throws MailException, MessagingException {
 //        if (porizovatele != null && !porizovatele.isEmpty()) {
 //            SimpleMailMessage novaZadostPorizovatele = new SimpleMailMessage(novaZadostToPorizovatel);
 //            String[] emailsTo = porizovatele.get(0).getKontaktniMail().split(";|,");

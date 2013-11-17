@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"  >
+    <body>
+        <ui:composition template="/resources/templates/mainTemplate.xhtml">
+            <ui:define name="title">
+                <title>Add new miner</title>
+            </ui:define>
+            <ui:define name="content">
+                <h:panelGrid columns="3">
+                    <p:outputLabel value="Miner name" for="minerName"/>
+                    <h:inputText value="#{addMiner.miner.minerName}" 
+                                 id="minerName" required="true"/>
+                    <p:message for="minerName"/>
+
+                    <p:outputLabel value="Host name" for="hostName"/>
+                    <h:inputText value="#{addMiner.miner.hostName}" 
+                                 id="hostName" required="true"/>
+                    <p:message for="hostName"/>
+
+                    <p:outputLabel value="Port" for="minerPort"/> 
+                    <p:inputMask value="#{addMiner.miner.port}" 
+                                 mask="9?9999" maxlength="5" placeHolder=" "
+                                 id="minerPort" required="true"/>
+                    <p:message for="minerPort"/>
+
+                    <p:outputLabel value="Check interval" for="checkInterval"/> 
+                    <p:selectOneMenu value="#{addMiner.miner.checkIntervalMs}" 
+                                     id="checkInterval" required="true">
+                        <f:selectItem itemValue="5000" itemLabel="5s"/>
+                        <f:selectItem itemValue="30000" itemLabel="30s"/>
+                        <f:selectItem itemValue="60000" itemLabel="60s"/>
+                    </p:selectOneMenu>
+                    <p:message for="checkInterval"/>
+                </h:panelGrid>
+                <p:commandButton value="Add miner" action="#{addMiner.addMiner()}"/>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
+

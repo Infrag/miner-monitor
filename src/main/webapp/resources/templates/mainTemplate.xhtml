@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:loadBundle basename="META-INF.msgs" var="msgs"/>
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="author" content="Ondřej Božek"/>
+        <h:outputStylesheet name="cssLayout.css" library="css"/>
+        <h:outputStylesheet name="default.css" library="css"/>
+        <ui:insert name="title">
+            <title>Miner Monitor</title>
+        </ui:insert>
+    </h:head>
+
+    <h:body id="body" >
+        <div id="header">
+            <ui:insert name="top" id="header">
+                <ui:include src="/resources/snippets/header.xhtml"/>
+            </ui:insert>
+        </div>
+        <div class="main">
+            <h:form id="form" >
+                <div id="right">
+                    <ui:insert name="right">Right</ui:insert>
+                </div>
+                <div>
+                    <div id="content" class="content">
+                        <ui:insert name="content">Content</ui:insert>
+                    </div>
+                    <br class="clearer"/>
+
+                    <p:messages showDetail="true" ></p:messages>
+                </div>
+            </h:form>
+            <br class="clearer"/>
+        </div>
+        <div id="bottom">
+            <ui:insert name="bottom"></ui:insert>
+            <ui:include src="/resources/snippets/footer.xhtml"/>
+        </div>
+    </h:body>
+
+</html>

@@ -12,7 +12,7 @@ import java.net.Socket;
 import java.util.Date;
 import org.obozek.minermonitor.LinuxTimeAdapter;
 import org.obozek.minermonitor.client.dto.CgMinerQueryDTO;
-import org.obozek.minermonitor.client.dto.CgMinerSummary;
+import org.obozek.minermonitor.client.dto.CgMinerResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -22,8 +22,7 @@ import org.springframework.stereotype.Service;
  * @author Ondrej.Bozek
  */
 @Service
-public class SocketCgMinerClien implements CgMinerClient
-{
+public class SocketCgMinerClien implements CgMinerClient {
 
     private static final Logger log = LoggerFactory.getLogger(SocketCgMinerClien.class);
     private static final int MAXRECEIVESIZE = 65535;
@@ -33,23 +32,20 @@ public class SocketCgMinerClien implements CgMinerClient
             .registerTypeAdapter(Date.class, new LinuxTimeAdapter()).create();
 
     @Override
-    public String queryCgMiner(String host, int port, CgMinerQueryDTO command)
-    {
+    public <T extends CgMinerResponse> T queryCgMiner(String host, int port, CgMinerQueryDTO<T> command) {
         String result = process(gson.toJson(command), host, port);
         JsonReader reader = new JsonReader(new StringReader(result));
         reader.setLenient(true);
-        CgMinerSummary cgMinerSummary = gson.fromJson(reader, CgMinerSummary.class);
-        return result;
+        T cgMinerSummary = gson.fromJson(reader, command.getCommand().getClazz());
+        return cgMinerSummary;
     }
 
-    private String createJsonQuery(String command, String parameter)
-    {
+    private String createJsonQuery(String command, String parameter) {
         return parameter == null ? String.format(JSON_QUERY, command)
                 : String.format(JSON_QUERY_WITH_PARAM, command, parameter);
     }
 
-    private String process(String cmd, String host, int port)
-    {
+    private String process(String cmd, String host, int port) {
         StringBuilder sb = new StringBuilder();
         char buf[] = new char[MAXRECEIVESIZE];
         int len = 0;

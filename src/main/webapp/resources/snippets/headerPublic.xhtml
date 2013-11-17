@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition id="header"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <div id="topContact">
+
+        <div class="flags">
+            <!--            <ice:form>
+                            <ice:commandLink action="#{localeBean.changeLocale('cs_CZ')}" partialSubmit="true" title="#{msgs.cz}"><img src="/resources/images/cz.jpg" alt="#{msgs.cz}" /></ice:commandLink>
+                            <ice:commandLink action="#{localeBean.changeLocale('EN')}" partialSubmit="true" title="#{msgs.en}"><img src="/resources/images/en.jpg" alt="#{msgs.en}" /></ice:commandLink>
+                        </ice:form>-->
+        </div>
+<!--        <ice:panelGroup rendered="#{sessionScope['logged']==null}" styleClass="login">
+            <div class="login-bottom"></div>
+            <ui:include src="/WEB-INF/jspf/loginBox.jspx"/>
+        </ice:panelGroup>
+        <ice:panelGroup rendered="#{sessionScope['logged']!=null}" styleClass="login">
+            <div class="login-bottom"></div>
+            <ui:include src="/WEB-INF/jspf/userBox.jspx"/>
+        </ice:panelGroup>-->
+    </div>
+    <div id="topNav">
+        <!--        <ul>
+                    <li><a href="/" title="Design formulářů">
+                            <h:outputText value="Design formulářů"/></a></li>
+                    <li class="even"><a href="/auth/FormsManagement" title="">
+                            <h:outputText value="Management formulářů"/></a></li>
+                </ul>-->
+        <!--        <div id="breadcrumb">
+                    Pozice na webu: <ice:outputText value=" #{TreeBean.nav}"/>
+                </div>-->
+
+    </div>
+    <h:panelGroup rendered="#{request.userPrincipal eq null}">
+        <div>
+            <h:link outcome="/login" value="#{msgs['login']}" styleClass="headerSmall" />&#160;|
+            <h:link outcome="/register" value="#{msgs['register']}" styleClass="headerSmall" />
+        </div>
+    </h:panelGroup>
+    <h:panelGroup rendered="#{request.userPrincipal ne null}">
+        <div>
+            <h:outputText value="#{msgs['principal']} #{request.userPrincipal.name}" styleClass="headerSmall" />
+        </div>
+        <div>
+            <a href="#{request.contextPath}/logout" class="headerSmall">#{msgs['logout']}</a>
+        </div>
+    </h:panelGroup>
+</ui:composition>

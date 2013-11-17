@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <body>
+        <ui:composition template="/resources/templates/mainTemplate.xhtml">
+            <ui:define name="title">
+                <title>Miner testing</title>
+            </ui:define>
+            <ui:define name="content">
+                <h:panelGrid columns="2">
+                    Summary: <h:outputText value="#{backingBean.summary}"/>
+
+                    host: <h:inputText value="#{backingBean.url}"/>
+                    port: <h:inputText value="#{backingBean.port}"/>
+                </h:panelGrid>
+                <h:commandButton action="#{backingBean.refreshSummary}" value="Refresh"/>
+                <h:commandButton action="#{backingBean.queryConfig()}" value="config"/>
+                <h:commandButton action="#{backingBean.queryDeviceDetails()}" value="deviceDetails"/>
+                <h:commandButton action="#{backingBean.queryDevices()}" value="devices"/>
+                <h:commandButton action="#{backingBean.queryNotify()}" value="notify"/>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
+

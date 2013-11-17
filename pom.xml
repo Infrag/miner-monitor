@@ -44,6 +44,12 @@
             <type>jar</type>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+            
         <dependency>  
             <groupId>org.eclipse.persistence</groupId>  
             <artifactId>javax.persistence</artifactId>  
@@ -54,12 +60,6 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.0.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>jstl</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -103,6 +103,11 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
             <version>${spring.security.version}</version>
         </dependency>
         <dependency>
@@ -181,6 +186,12 @@
             <version>0.7.1.RELEASE</version>
         </dependency>
         
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.3</version>
+        </dependency>
+            
         <!--        <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
@@ -201,6 +212,7 @@
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
+                    <debug>false</debug>
                 </configuration>
             </plugin>
             <plugin>
