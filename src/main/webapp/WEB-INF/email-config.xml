@@ -10,14 +10,14 @@
     <!-- Configuration of Mailing    -->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="${email.server}"/>
-        <property name="username" value="#{'${email.username}' == defaultConfiguration['email.username'] ? null : '${email.username}'}"/>
-        <property name="password" value="#{'${email.password}' == defaultConfiguration['email.password'] ? null : '${email.password}'}"/>
+        <property name="username" value="#{'${email.authName}' == defaultConfiguration['email.authName'] ? null : '${email.authName}'}"/>
+        <property name="password" value="#{'${email.authName}' == defaultConfiguration['email.authName'] ? null : '${email.authName}'}"/>
     </bean>    
     
     <!-- Template mailove komunikace --> 
     <bean class="org.springframework.mail.SimpleMailMessage">
         <qualifier value="novaZadostToPorizovatel"/>
-        <property name="from" value="${email.from}"/>
+        <property name="from" value="${email.sender}"/>
         <property name="subject" value="Výdej dat - založení nové žádosti"/>
         <property name="text"> 
             <value><![CDATA[

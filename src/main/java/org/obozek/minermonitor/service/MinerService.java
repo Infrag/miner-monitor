@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
 import javax.annotation.PostConstruct;
 import org.apache.commons.collections.CollectionUtils;
@@ -33,6 +34,7 @@ import org.obozek.minermonitor.repository.MinerFilter;
 import org.obozek.minermonitor.repository.MinerRepository;
 import org.obozek.minermonitor.repository.MinerSummaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
@@ -55,7 +57,9 @@ public class MinerService {
     @Autowired
     private CgMinerService cgMinerService;
     private final HashMap<Long, ScheduledFuture> scheduledMiners = new HashMap<>();
-    public static final int START_TIME_SPREAD = 2;
+    @Value("${minerCheck.startSpread}")
+    public int startTimeSpread = 2000;
+    public Map<CgMinerCmdEnum, Map<Long, List<MinerResponseListener>>> listeners = new HashMap<>();
 
     @PostConstruct
     private void init() {
@@ -63,9 +67,11 @@ public class MinerService {
         List<Miner> minersToStart = repository.findStartedMiners();
         int i = 0;
         for (Miner miner : minersToStart) {
-            DateTime date = new DateTime();
-            startMinerChecking(miner, date.plusSeconds(i).toDate());
-            i += START_TIME_SPREAD;
+            if (!scheduledMiners.containsKey(miner.getId())) {
+                DateTime date = new DateTime();
+                startMinerChecking(miner, date.plusMillis(i).toDate());
+                i += startTimeSpread;
+            }
         }
     }
 
@@ -88,12 +94,12 @@ public class MinerService {
             miner.getMinerChecks().add(createSummaryMinerCheck(miner));
         }
         miner.setEnabled(Boolean.TRUE);
-        saveMiner(miner);
+        miner = saveMiner(miner);
         ScheduledFuture scheduled = scheduledMiners.get(miner.getId());
         if (scheduled != null) {
             scheduled.cancel(false);
         }
-        scheduled = scheduler.scheduleAtFixedRate(new MinerCheckTask(miner, cgMinerService, this), date, miner.getCheckIntervalMs());
+        scheduled = scheduler.scheduleAtFixedRate(new MinerCheckTask(miner, cgMinerService, this), date, miner.getCheckIntervalMs().longValue());
         scheduledMiners.put(miner.getId(), scheduled);
         return scheduled;
     }
@@ -119,6 +125,11 @@ public class MinerService {
     }
 
     public Miner saveMiner(Miner miner) {
+        if (miner.getMinerChecks() != null) {
+            for (MinerCheck minerCheck : miner.getMinerChecks()) {
+                minerCheck.setMiner(miner);
+            }
+        }
         return repository.save(miner);
     }
 
@@ -126,7 +137,8 @@ public class MinerService {
         return repository.filter(pageRequest);
     }
 
-    public MinerSummary saveResponse(CgMinerResponse response, Miner miner, Long queryLag) {
+    protected MinerSummary saveResponse(CgMinerResponse response, Miner miner, Long queryLag) {
+
         MinerSummary summary = new MinerSummary(response, queryLag);
         summary.setMiner(miner);
         summary = minerSummary.save(summary);
@@ -138,5 +150,32 @@ public class MinerService {
         if (StatusState.T.equals(response.getStatus().get(0).getStatus())) {
 
         }
+    }
+
+    public void registerListener(MinerResponseListener listener) {
+        Map<Long, List<MinerResponseListener>> cmdListeners = listeners.get(listener.getCmd());
+        if (cmdListeners == null) {
+            cmdListeners = new HashMap();
+        }
+        List<MinerResponseListener> idListener = cmdListeners.get(listener.getMinerId());
+        if (idListener == null) {
+            idListener = new ArrayList<>();
+        }
+        idListener.add(listener);
+        cmdListeners.put(listener.getMinerId(), idListener);
+        listeners.put(listener.getCmd(), cmdListeners);
+    }
+
+    public void unregisterListener(MinerResponseListener listener) {
+        Map<Long, List<MinerResponseListener>> cmdListeners = listeners.get(listener.getCmd());
+        if (cmdListeners == null) {
+            return;
+        }
+        List<MinerResponseListener> idListeners = cmdListeners.get(listener.getMinerId());
+        if (idListeners == null) {
+            return;
+        }
+        idListeners.remove(listener);
+        listeners.put(listener.getCmd(), cmdListeners);
     }
 }

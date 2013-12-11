@@ -29,8 +29,8 @@ import org.obozek.minermonitor.entities.MinerWarning;
 public class MinerCheckTask implements Runnable {
 
     private Miner miner;
-    private CgMinerService service;
-    private MinerService minerService;
+    private final CgMinerService service;
+    private final MinerService minerService;
 
     public MinerCheckTask(Miner miner, CgMinerService service, MinerService minerService) {
         this.miner = miner;
@@ -45,8 +45,8 @@ public class MinerCheckTask implements Runnable {
             CgMinerResponse response = service.getResponse(miner.getHostName(), miner.getPort(), minerCheck.getCommand());
             long endTime = System.currentTimeMillis();
             minerService.saveResponse(response, miner, endTime - startTime);
-            miner.setAlive(StatusState.T.equals(response.getStatus().get(0).getStatus()));
-            minerService.saveMiner(miner);
+            miner.setAlive(!StatusState.T.equals(response.getStatus().get(0).getStatus()));
+            miner = minerService.saveMiner(miner);
             for (MinerWarning warning : minerCheck.getMinerWarnings()) {
                 minerService.handleWarning(warning, response);
             }

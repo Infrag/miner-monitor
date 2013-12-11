@@ -8,21 +8,28 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <body>
         <ui:composition template="/resources/templates/mainTemplate.xhtml">
-            <ui:define name="title">
-                <title>Manage your miners</title>
-            </ui:define>
+            <ui:param name="subtitle" value="- Manage your miners"/>
             <ui:define name="content">
+                <p:poll interval="5" update="minersTable" />  
                 <p:dataTable value="#{minerManagement.dataModel}" var="miner" 
-                             lazy="true" paginator="true" rows="20">
+                             lazy="true" paginator="true" rows="20" id="minersTable">
                     <p:column headerText="Miner name" sortBy="minerName">
-                        <h:outputText value="#{miner.minerName}"/>
+                        <h:link outcome="/view/auth/MinerSummary.xhtml"  value="#{miner.minerName}">
+                            <f:param name="minerId" value="#{miner.id}"/> 
+                        </h:link>
                     </p:column>
                     <p:column headerText="Miner location" sortBy="hostName">
                         <h:outputText value="#{miner.hostName}"/>
                     </p:column>
                     <p:column headerText="Miner alive" sortBy="hostName">
-                        <p:selectBooleanCheckbox value="#{miner.alive}" 
+                        <p:selectBooleanCheckbox value="#{miner.alive}" disabled="true"
                                                  style="#{!miner.alive ?'background-color:red':''}"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandLink rendered="#{!miner.isEnabled()}" value="Start miner checking" partialSubmit="true"
+                                       action="#{minerManagement.startMinerChecking(miner)}" update="minersTable"/>
+                        <p:commandLink rendered="#{miner.isEnabled()}" value="Stop miner checking" partialSubmit="true"
+                                       action="#{minerManagement.stopMinerChecking(miner)}" update="minersTable"/>
                     </p:column>
                 </p:dataTable>
                 <p:commandButton action="pretty:auth:AddMiner" value="Add miner"/>

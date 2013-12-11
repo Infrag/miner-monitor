@@ -18,6 +18,8 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Embeddable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * {"STATUS":"S","When":1384251030,"Code":11,"Msg":"Summary","Description":"cgminer
@@ -30,7 +32,9 @@ public class StatusDTO implements Serializable {
 
     @SerializedName("STATUS")
     private StatusState status;
-    private Date when;
+    @Temporal(TemporalType.TIMESTAMP)
+    @SerializedName("When")
+    private Date whenTime;
     private Integer code;
     private String msg;
     private String description;
@@ -40,7 +44,7 @@ public class StatusDTO implements Serializable {
 
     public StatusDTO(StatusState status, Date when, Integer code, String msg, String description) {
         this.status = status;
-        this.when = when;
+        this.whenTime = when;
         this.code = code;
         this.msg = msg;
         this.description = description;
@@ -50,8 +54,8 @@ public class StatusDTO implements Serializable {
         return status;
     }
 
-    public Date getWhen() {
-        return when;
+    public Date getWhenTime() {
+        return whenTime;
     }
 
     public Integer getCode() {

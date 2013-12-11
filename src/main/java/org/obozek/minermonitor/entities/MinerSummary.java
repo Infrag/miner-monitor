@@ -16,6 +16,7 @@ package org.obozek.minermonitor.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -48,7 +49,7 @@ public class MinerSummary implements Serializable {
     private Double utility = 0D;
     private Double difficultyAccepted = 0D;
     private Long bestShare = 0L;
-    private Double deviceHardaware = 0D;
+    private Double deviceHardware = 0D;
     private Double deviceRejected = 0D;
     private Double poolRejected = 0D;
     private Double poolStale = 0D;
@@ -67,7 +68,7 @@ public class MinerSummary implements Serializable {
             SummaryDTO summary = ((CgMinerSummary) response).getSummary().get(0);
             this.accepted = summary.getAccepted();
             this.bestShare = summary.getBestShare();
-            this.deviceHardaware = summary.getDeviceHardaware();
+            this.deviceHardware = summary.getDeviceHardware();
             this.deviceRejected = summary.getDeviceRejected();
             this.difficultyAccepted = summary.getDifficultyAccepted();
             this.elapsed = summary.getElapsed();
@@ -81,6 +82,9 @@ public class MinerSummary implements Serializable {
             this.rejected = summary.getRejected();
             this.utility = summary.getUtility();
         }
+    }
+
+    public MinerSummary() {
     }
 
     public Long getId() {
@@ -179,12 +183,12 @@ public class MinerSummary implements Serializable {
         this.bestShare = bestShare;
     }
 
-    public Double getDeviceHardaware() {
-        return deviceHardaware;
+    public Double getDeviceHardware() {
+        return deviceHardware;
     }
 
-    public void setDeviceHardaware(Double deviceHardaware) {
-        this.deviceHardaware = deviceHardaware;
+    public void setDeviceHardware(Double deviceHardware) {
+        this.deviceHardware = deviceHardware;
     }
 
     public Double getDeviceRejected() {
@@ -241,6 +245,28 @@ public class MinerSummary implements Serializable {
 
     public void setQueryLag(Long queryLag) {
         this.queryLag = queryLag;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MinerSummary other = (MinerSummary) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
 }

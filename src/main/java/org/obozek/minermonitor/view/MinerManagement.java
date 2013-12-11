@@ -6,6 +6,7 @@
 package org.obozek.minermonitor.view;
 
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
+import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import org.obozek.minermonitor.config.SecurityContextHelper;
 import org.obozek.minermonitor.entities.Miner;
@@ -20,10 +21,10 @@ import org.springframework.web.context.WebApplicationContext;
  *
  * @author infragile
  */
-@URLMapping(id = Navigation.MINER_MANAGEMENT, viewId = "/view/auth/index.xhtml", pattern = "/auth")
+@URLMapping(id = Navigation.MINER_MANAGEMENT, viewId = "/view/auth/index.xhtml", pattern = "/auth/")
 @Component
-@Scope(WebApplicationContext.SCOPE_REQUEST)
-public class MinerManagement {
+@Scope("view")
+public class MinerManagement implements Serializable {
 
     @Autowired
     private SecurityContextHelper securityContextHelper;

@@ -29,13 +29,6 @@
     </context-param>
     <context-param>
         <description>
-            Comma-separated list of PrettyFaces configuration files to load.
-        </description>
-        <param-name>com.ocpsoft.pretty.CONFIG_FILES</param-name>
-        <param-value>/WEB-INF/navigation-config.xml</param-value>
-    </context-param>
-    <context-param>
-        <description>
             PrettyFaces supports configuration via annotations out of the box. Nevertheless 
             it is strongly recommended to manually specify the java packages that contain 
             annotated classes. You can specify the packages to scan for annotations by 
@@ -76,20 +69,16 @@
         </description>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
-    <filter>
-        <description>
-            Servlet filter to enable PrettyFaces navigation framework.
-        </description>
-        <filter-name>navigation</filter-name>
-        <filter-class>com.ocpsoft.pretty.PrettyFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>navigation</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>FORWARD</dispatcher>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>ERROR</dispatcher>
-    </filter-mapping>
+    
+    <servlet>
+        <servlet-name>Push Servlet</servlet-name>
+        <servlet-class>org.primefaces.push.PushServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Push Servlet</servlet-name>
+        <url-pattern>/primepush/*</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

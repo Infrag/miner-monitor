@@ -8,10 +8,12 @@
 
     <f:loadBundle basename="META-INF.msgs" var="msgs"/>
     <h:head>
+        <ui:param name="mainTitle" value="#{empty mainTitle ? 'Hash Monitor' : mainTitle}"/>
+        <ui:param name="subtitle" value="#{empty subtitle ? '' : subtitle}"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="author" content="Ondřej Božek"/>
         <ui:insert name="title">
-            <title>#{msgs['formDesign']}</title>
+            <title>#{mainTitle} #{subtitle}</title>
         </ui:insert>
     </h:head>
 

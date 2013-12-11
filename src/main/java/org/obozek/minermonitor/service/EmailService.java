@@ -15,25 +15,11 @@
 package org.obozek.minermonitor.service;
 
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.InputStreamSource;
-import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Service;
 
 /**
  *
@@ -56,7 +42,7 @@ public class EmailService
     @Qualifier(value = "novaZadostToPorizovatel")
     private SimpleMailMessage novaZadostToPorizovatel;
     //
-    @Value("${email.from}")
+    @Value("${email.sender}")
     public static final String ZADOST_DETAIL_URL = "/zadost/Detail-zadosti-o-vydej-";
     public static final String PASPORT_DETAIL_URL = "/main/list-pasport/list-pasport-";
 

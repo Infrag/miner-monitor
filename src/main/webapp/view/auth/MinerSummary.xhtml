@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"  >
+    <body>
+        <ui:composition template="/resources/templates/mainTemplate.xhtml">
+            <ui:param name="subtitle" value="- #{minerSummary.miner.minerName} summary"/>
+            <ui:define name="content">
+                <p:poll update="resultsBlock" interval="#{minerSummary.interval}" 
+                        autoStart="#{minerSummary.periodicChecking}"/>
+                <h:panelGroup id="resultsBlock">
+                    <h2>#{minerSummary.miner.minerName}</h2>
+                    <h:panelGrid columns="2" >
+                        <f:facet name="header">
+                            <h:outputText value="Miner status"/>
+                        </f:facet>
+                        Message Id
+                        <h:outputText value="#{minerSummary.summary.id}"/>
+
+                        Status 
+                        <h:outputText value="#{minerSummary.summary.status[0].status}"/>
+
+                        Code 
+                        <h:outputText value="#{minerSummary.summary.status[0].code}"/>
+
+                        Message 
+                        <h:outputText value="#{minerSummary.summary.status[0].msg}"/>
+
+                        Description 
+                        <h:outputText value="#{minerSummary.summary.status[0].description}"/>
+
+                        Time received
+                        <h:outputText value="#{minerSummary.summary.status[0].whenTime}"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" rendered="#{minerSummary.success}">
+                        <f:facet name="header">
+                            <h:outputText value="Miner summary"/>
+                        </f:facet>
+                        Elapsed
+                        <h:outputText value="#{minerSummary.summary.summary[0].elapsed}"/>
+
+                        MHS average 
+                        <h:outputText value="#{minerSummary.summary.summary[0].mhsAverage}"/>
+
+                        MHS average last 5s
+                        <h:outputText value="#{minerSummary.summary.summary[0].mhs5s}"/>
+
+                        Found blocks
+                        <h:outputText value="#{minerSummary.summary.summary[0].foundBlocks}"/>
+
+                        Getworks 
+                        <h:outputText value="#{minerSummary.summary.summary[0].getworks}"/>
+
+                        Blocks accepted 
+                        <h:outputText value="#{minerSummary.summary.summary[0].accepted}"/>
+
+                        Blocks rejected
+                        <h:outputText value="#{minerSummary.summary.summary[0].rejected}"/>
+
+                        HW errors
+                        <h:outputText value="#{minerSummary.summary.summary[0].hwErrors}"/>
+
+                        Utility
+                        <h:outputText value="#{minerSummary.summary.summary[0].utility}"/>
+
+                        Difficulty accepted 
+                        <h:outputText value="#{minerSummary.summary.summary[0].difficultyAccepted}"/>
+
+                        Best share
+                        <h:outputText value="#{minerSummary.summary.summary[0].bestShare}"/>
+
+                        Device hardware %
+                        <h:outputText value="#{minerSummary.summary.summary[0].deviceHardware}"/>
+
+                        Device rejected %
+                        <h:outputText value="#{minerSummary.summary.summary[0].deviceRejected}"/>
+
+                        Pool rejected %
+                        <h:outputText value="#{minerSummary.summary.summary[0].poolRejected}"/>
+
+                        Pool stale %
+                        <h:outputText value="#{minerSummary.summary.summary[0].poolStale}"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+                <p:commandButton value="Refresh" update="resultsBlock" action="#{minerSummary.checkMiner()}"
+                                 rendered="#{!minerSummary.periodicChecking}"/>
+            </ui:define>
+            <ui:define name="right">
+                <h:link outcome="/view/auth/index.xhtml" value="Back to list of Miners"/>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
+

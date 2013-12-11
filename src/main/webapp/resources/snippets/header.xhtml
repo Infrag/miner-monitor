@@ -37,7 +37,7 @@
     <div class="userBox">
         <h:panelGroup rendered="#{request.userPrincipal eq null}">
             <div>
-                <h:link outcome="pretty:loginPage" value="#{msgs['login']}" styleClass="headerSmall" />&#160;|
+                <h:link outcome="/view/auth/index.xhtml" value="#{msgs['login']}" styleClass="headerSmall" />&#160;|
                 <h:link outcome="pretty:Register" value="#{msgs['register']}" styleClass="headerSmall" />
             </div>
         </h:panelGroup>

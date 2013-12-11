@@ -14,7 +14,6 @@
  */
 package org.obozek.minermonitor.entities;
 
-import com.sun.istack.internal.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +24,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -46,7 +44,6 @@ public class User implements Serializable {
     private Long id;
     private String firstName;
     private String surName;
-    @NotNull
     @Column(nullable = false)
     @Basic(optional = false)
     private String email;
@@ -57,7 +54,6 @@ public class User implements Serializable {
     private Date lastAccess;
     @OneToMany()
     private List<UserRole> userRoles;
-    @NotNull
     @Column(nullable = false)
     @Basic(optional = false)
     private String password;

@@ -15,7 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
  *
  * @author Ondrej.Bozek
  */
-@URLMapping(id = "auth:test", viewId = "/view/auth/index.xhtml", pattern = "/auth/test")
+@URLMapping(id = "auth:test", viewId = "/view/auth/test.xhtml", pattern = "/auth/test")
 @Component
 @Scope(WebApplicationContext.SCOPE_REQUEST)
 public class BackingBean implements Serializable

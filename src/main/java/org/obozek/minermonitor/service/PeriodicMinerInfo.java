@@ -14,19 +14,34 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.obozek.minermonitor.repository;
+package org.obozek.minermonitor.service;
 
-import java.util.Date;
-import java.util.List;
-import org.obozek.filterlib.PageFilter;
-import org.obozek.minermonitor.entities.MinerSummary;
+import java.util.concurrent.ScheduledFuture;
+import org.obozek.minermonitor.client.dto.CgMinerSummary;
 
 /**
  *
  * @author infragile
  */
-public interface MinerSummaryRepository extends BaseRepository<MinerSummary, Long, PageFilter> {
+public class PeriodicMinerInfo {
 
-    List<MinerSummary> findGreaterThanTimeAcquiredOrderByTimeAcquired(Date timeAcquired);
-    
+    private final ScheduledFuture scheduledFuture;
+    private CgMinerSummary lastSummary;
+
+    public PeriodicMinerInfo(ScheduledFuture scheduledFuture) {
+        this.scheduledFuture = scheduledFuture;
+    }
+
+    public ScheduledFuture getScheduledFuture() {
+        return scheduledFuture;
+    }
+
+    public CgMinerSummary getLastSummary() {
+        return lastSummary;
+    }
+
+    public void setLastSummary(CgMinerSummary lastSummary) {
+        this.lastSummary = lastSummary;
+    }
+
 }

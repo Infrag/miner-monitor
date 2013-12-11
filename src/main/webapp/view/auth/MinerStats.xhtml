@@ -9,15 +9,11 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"  >
     <body>
-        <ui:param name="subtitle" value=""/>
         <ui:composition template="/resources/templates/mainTemplate.xhtml">
+            <ui:param name="subtitle" value="- #{minerStatistics.miner.minerName} statistics"/>
             <ui:define name="content">
-                <p:panelGrid columns="2">
-                    Summary: <h:outputText value="#{backingBean.summary}"/>
-
-                    host: <h:inputText value="#{backingBean.url}"/>
-                    port: <h:inputText value="#{backingBean.port}"/>
-                </p:panelGrid>
+                <p:lineChart id="linear" value="#{minerStatistics.linearModel}" legendPosition="e"  
+                             title="Mhs chart"  style="height:300px"/>  
             </ui:define>
         </ui:composition>
     </body>

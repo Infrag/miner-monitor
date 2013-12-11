@@ -28,8 +28,7 @@ import com.google.gson.annotations.SerializedName;
  *
  * @author Ondrej.Bozek
  */
-public class SummaryDTO
-{
+public class SummaryDTO {
 
     private Integer elapsed;
     @SerializedName("MHS av")
@@ -49,7 +48,7 @@ public class SummaryDTO
     @SerializedName("Best Share")
     private Long bestShare;
     @SerializedName("Device Hardware%")
-    private Double deviceHardaware;
+    private Double deviceHardware;
     @SerializedName("Device Rejected%")
     private Double deviceRejected;
     @SerializedName("Pool Rejected%")
@@ -60,8 +59,7 @@ public class SummaryDTO
     public SummaryDTO(Integer elapsed, Double mhsAverage, Double mhs5s, Long foundBlocks,
             Long getworks, Long accepted, Long rejected, Long hwErrors, Double utility,
             Double difficultyAccepted, Long bestShare, Double deviceHardaware,
-            Double deviceRejected, Double poolRejected, Double poolStale)
-    {
+            Double deviceRejected, Double poolRejected, Double poolStale) {
         this.elapsed = elapsed;
         this.mhsAverage = mhsAverage;
         this.mhs5s = mhs5s;
@@ -73,88 +71,72 @@ public class SummaryDTO
         this.utility = utility;
         this.difficultyAccepted = difficultyAccepted;
         this.bestShare = bestShare;
-        this.deviceHardaware = deviceHardaware;
+        this.deviceHardware = deviceHardaware;
         this.deviceRejected = deviceRejected;
         this.poolRejected = poolRejected;
         this.poolStale = poolStale;
     }
 
-    public SummaryDTO()
-    {
+    public SummaryDTO() {
     }
 
-    public Integer getElapsed()
-    {
+    public Integer getElapsed() {
         return elapsed;
     }
 
-    public Double getMhsAverage()
-    {
+    public Double getMhsAverage() {
         return mhsAverage;
     }
 
-    public Double getMhs5s()
-    {
+    public Double getMhs5s() {
         return mhs5s;
     }
 
-    public Long getFoundBlocks()
-    {
+    public Long getFoundBlocks() {
         return foundBlocks;
     }
 
-    public Long getGetworks()
-    {
+    public Long getGetworks() {
         return getworks;
     }
 
-    public Long getAccepted()
-    {
+    public Long getAccepted() {
         return accepted;
     }
 
-    public Long getRejected()
-    {
+    public Long getRejected() {
         return rejected;
     }
 
-    public Long getHwErrors()
-    {
+    public Long getHwErrors() {
         return hwErrors;
     }
 
-    public Double getUtility()
-    {
+    public Double getUtility() {
         return utility;
     }
 
-    public Double getDifficultyAccepted()
-    {
+    public Double getDifficultyAccepted() {
         return difficultyAccepted;
     }
 
-    public Long getBestShare()
-    {
+    public Long getBestShare() {
         return bestShare;
     }
 
-    public Double getDeviceHardaware()
-    {
-        return deviceHardaware;
+    public Double getDeviceHardware() {
+        return deviceHardware;
     }
 
-    public Double getDeviceRejected()
-    {
+    public Double getDeviceRejected() {
         return deviceRejected;
     }
 
-    public Double getPoolRejected()
-    {
+    public Double getPoolRejected() {
         return poolRejected;
     }
 
-    public Double getPoolStale()
-    {
+    public Double getPoolStale() {
         return poolStale;
     }
 }

@@ -14,19 +14,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.obozek.minermonitor.repository;
+package org.obozek.minermonitor.service;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import org.obozek.filterlib.PageFilter;
 import org.obozek.minermonitor.entities.MinerSummary;
+import org.obozek.minermonitor.repository.MinerSummaryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author infragile
  */
-public interface MinerSummaryRepository extends BaseRepository<MinerSummary, Long, PageFilter> {
+@Service
+public class MinerSummaryService implements Serializable {
 
-    List<MinerSummary> findGreaterThanTimeAcquiredOrderByTimeAcquired(Date timeAcquired);
-    
+    @Autowired
+    private MinerSummaryRepository minerSummaryRepository;
+
+    /**
+     * To be optimized!!
+     * @param timeAcquired
+     * @return 
+     */
+    public List<MinerSummary> getSummariesFrom(Date timeAcquired) {
+        return minerSummaryRepository.findGreaterThanTimeAcquiredOrderByTimeAcquired(timeAcquired);
+    }
+
 }

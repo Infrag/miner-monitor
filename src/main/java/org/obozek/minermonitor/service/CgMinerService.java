@@ -55,8 +55,8 @@ public class CgMinerService {
         }
     }
 
-    public CgMinerSummary getSummary(String host, Integer port) {
-        return getResponse(host, port, new CgMinerQueryDTO<CgMinerSummary>(CgMinerCmdEnum.summary));
+    public CgMinerResponse getSummary(String host, Integer port) {
+        return getResponse(host, port, new CgMinerQueryDTO<>(CgMinerCmdEnum.summary));
     }
 
     public CgMinerResponse getConfig(String host, Integer port) {

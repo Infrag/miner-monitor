@@ -14,19 +14,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.obozek.minermonitor.repository;
+package org.obozek.minermonitor.service;
 
-import java.util.Date;
-import java.util.List;
-import org.obozek.filterlib.PageFilter;
-import org.obozek.minermonitor.entities.MinerSummary;
+import java.util.EventListener;
+import org.obozek.minermonitor.client.dto.CgMinerCmdEnum;
+import org.obozek.minermonitor.client.dto.CgMinerResponse;
 
 /**
  *
  * @author infragile
+ * @param <T>
  */
-public interface MinerSummaryRepository extends BaseRepository<MinerSummary, Long, PageFilter> {
+public interface MinerResponseListener<T extends CgMinerResponse> extends EventListener {
 
-    List<MinerSummary> findGreaterThanTimeAcquiredOrderByTimeAcquired(Date timeAcquired);
-    
+    Long getMinerId();
+
+    CgMinerCmdEnum getCmd();
+
+    T listenToResponse(T response);
+
 }

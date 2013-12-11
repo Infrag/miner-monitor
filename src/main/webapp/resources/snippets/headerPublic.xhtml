@@ -36,8 +36,8 @@
     </div>
     <h:panelGroup rendered="#{request.userPrincipal eq null}">
         <div>
-            <h:link outcome="/login" value="#{msgs['login']}" styleClass="headerSmall" />&#160;|
-            <h:link outcome="/register" value="#{msgs['register']}" styleClass="headerSmall" />
+            <h:link outcome="pretty:auth:Index" value="#{msgs['login']}" styleClass="headerSmall" />&#160;|
+            <h:link outcome="pretty:Register" value="#{msgs['register']}" styleClass="headerSmall" />
         </div>
     </h:panelGroup>
     <h:panelGroup rendered="#{request.userPrincipal ne null}">

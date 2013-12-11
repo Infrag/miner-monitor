@@ -8,9 +8,7 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"  >
     <body>
         <ui:composition template="/resources/templates/mainTemplate.xhtml">
-            <ui:define name="title">
-                <title>Add new miner</title>
-            </ui:define>
+            <ui:param name="subtitle" value="- Add new miner"/>
             <ui:define name="content">
                 <h:panelGrid columns="3">
                     <p:outputLabel value="Miner name" for="minerName"/>
