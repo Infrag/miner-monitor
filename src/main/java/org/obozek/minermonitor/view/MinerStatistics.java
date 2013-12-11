@@ -17,6 +17,7 @@
 package org.obozek.minermonitor.view;
 
 import com.ocpsoft.pretty.faces.annotation.URLAction;
+import com.ocpsoft.pretty.faces.annotation.URLBeanName;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import java.util.List;
 import org.joda.time.DateTime;
@@ -24,7 +25,7 @@ import org.obozek.minermonitor.entities.Miner;
 import org.obozek.minermonitor.entities.MinerSummary;
 import org.obozek.minermonitor.service.MinerService;
 import org.obozek.minermonitor.service.MinerSummaryService;
-import static org.obozek.minermonitor.view.Navigation.ADD_NEW_MINER;
+import static org.obozek.minermonitor.view.Navigation.MINER_STATS;
 import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,11 @@ import org.springframework.stereotype.Component;
  *
  * @author infragile
  */
-@URLMapping(id = ADD_NEW_MINER, viewId = "/view/auth/MinerStats.xhtml",
+@URLMapping(id = MINER_STATS, viewId = "/view/auth/MinerStats.xhtml",
         pattern = "/auth/miner-statistics-#{minerId : minerStatistics.minerId}")
 @Component
 @Scope("view")
+@URLBeanName("minerStatistics")
 public class MinerStatistics {
 
     private Long minerId;

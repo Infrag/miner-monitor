@@ -26,6 +26,7 @@ public class Navigation {
     public static final String MINER_DETAIL = "auth:MinerDetail",
             MINER_MANAGEMENT = "auth:Index",
             ADD_NEW_MINER = "auth:AddMiner",
+            MINER_STATS = "auth:MinerStats",
             INDEX = "index";
 
     public static final String getPretty(String string) {

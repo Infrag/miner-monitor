@@ -90,7 +90,12 @@
                                  rendered="#{!minerSummary.periodicChecking}"/>
             </ui:define>
             <ui:define name="right">
-                <h:link outcome="/view/auth/index.xhtml" value="Back to list of Miners"/>
+                <ul>
+                    <li><h:link outcome="/view/auth/index.xhtml" value="Back to list of Miners"/></li>
+                    <li><h:link outcome="/view/auth/MinerStats.xhtml" value="Miner statistics">
+                            <f:param name="minerId" value="#{minerSummary.minerId}"/>
+                        </h:link></li>
+                </ul>
             </ui:define>
         </ui:composition>
     </body>
